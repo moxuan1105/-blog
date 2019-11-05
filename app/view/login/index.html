@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- {load href="/static/layui/css/layui.css" /}
+    {load href="/static/layui/layui.js" /} -->
+
+    {css href="/static/layui/css/layui.css" /}
+    {js href="/static/layui/layui.js" /}
+
+</head>
+<body>
+    <form  method="post">
+        username:
+        <input type="text"><br>
+        password:
+        <input type="password"><br>
+        <button>submit</button>
+    </form>
+
+    <script>
+    layui.use(['layer'],function(){
+        var layer = layui.layer;
+        layer.msg('sadasdasd');
+    });
+    </script>
+</body>
+</html>
