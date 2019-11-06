@@ -6,7 +6,7 @@ use think\facade\View;
 use think\facade\Route;
 use app\model\User;
 
-class Index extends BaseController
+class Admin extends BaseController
 {
     public function index()
     {

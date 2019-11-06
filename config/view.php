@@ -22,4 +22,8 @@ return [
     'taglib_begin'  => '{',
     // 标签库标签结束标记
     'taglib_end'    => '}',
+
+    'tpl_replace_string'  =>  [
+        '__STATIC__'=>$_SERVER['REQUEST_SCHEME'] .'://' . $_SERVER['HTTP_HOST'] . str_replace('/index.php' ,'' ,$_SERVER['SCRIPT_NAME']) . '/static',
+    ],
 ];

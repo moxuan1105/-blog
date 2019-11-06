@@ -11,11 +11,10 @@ class Index extends BaseController
     public function index()
     {
         // 验证是否进行登录操作
-        if(!session('?username')){
-            return redirect(Route::buildUrl('Login/'));
-        }else{
-            return View::fetch();
-        }
+        // echo $_SERVER['REQUEST_SCHEME'];
+        // echo $_SERVER['HTTP_HOST'];
+        // echo $_SERVER['SCRIPT_NAME'];
+        return View::fetch();
     }
 
     /**

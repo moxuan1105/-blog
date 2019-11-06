@@ -15,8 +15,8 @@
     {js href="/static/blog/assets/jquery.min.js" /}
     {js href="/static/blog/assets/jquery-ui.min.js" /}
 	<!-- 实现拖动效果，需引入 JQuery UI -->
-    {js href="/static/blog/assets/waifu-tips.js?v=1.4.2" /}
-    {js href="/static/blog/assets/live2d.min.js?v=1.0.5" /}
+    {js href="/static/blog/assets/waifu-tips.js" /}
+    {js href="/static/blog/assets/live2d.min.js" /}
     {js href="/static/blog/js/swiper.js" /}
 
 	<script>
@@ -61,7 +61,7 @@
 	</header>
 	<article class="container">
 		<div class="blogs">
-			<li> <span class="blogpic"><a href="/"><img src="images/text02.jpg"></a></span>
+			<li> <span class="blogpic"><a href="/"><img src="/static/blog/images/text02.jpg"></a></span>
 				<h3 class="blogtitle"><a href="http://localhost/bloghtml/gbook.html">陌上花开，可缓缓归矣</a></h3>
 				<div class="bloginfo">
 					<p>陌上花开，可缓缓归矣...</p>
@@ -70,7 +70,7 @@
 					 class="dtime">2018-05-04</span><span class="viewnum">陌上花开，可缓缓归矣陌上花开，矣<a href="/">0</a>陌上花开，可缓缓归矣陌上花开，可缓缓归矣</span><span
 					 class="readmore"><a href="/">陌上花开，可缓缓归矣Ķ陌上花开，</a></span></div>
 			</li>
-			<li> <span class="blogpic"><a href="/"><img src="images/text01.jpg"></a></span>
+			<li> <span class="blogpic"><a href="/"><img src="/static/blog/images/text01.jpg"></a></span>
 				<h3 class="blogtitle"><a href="/">陌上花开，可缓缓归矣</a></h3>
 				<div class="bloginfo">
 					<p>陌上花开，可缓缓归矣...</p>
@@ -174,10 +174,9 @@
 		</div>
     </div>
 
-        {js href="/static/blog/assets/waifu-tips.json?v=1.4.2" /}
     <script>
         live2d_settings['modelAPI'] = '//107.182.26.97/live2d_api/';
-        live2d_settings['tipsMessage'] = './assets/waifu-tips.json';
+        live2d_settings['tipsMessage'] = '/static/blog/assets/waifu-tips.json';
         // live2d_settings['hitokotoAPI']  = 'localhost'; 
         live2d_settings['modelId'] = 1; // 默认模型 ID
         live2d_settings['modelTexturesId'] = 87; // 默认材质 ID
@@ -193,7 +192,8 @@
         live2d_settings['waifuDraggable'] = 'axis-x'; // 拖拽样式
         live2d_settings['waifuEdgeSide'] = 'right:20';
         live2d_settings['waifuMinWidth'] = 'disable';      // 面页小于 指定宽度 隐藏看板娘，例如 'disable'(禁用), '768px'
-        // live2d_settings['aboutPageUrl'] = 'http://localhost'; // 关于页地址, '{URL 网址}'
+
+        initModel("/static/blog/assets/waifu-tips.json")
     </script>
 </body>
 </html>
