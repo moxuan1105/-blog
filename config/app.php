@@ -33,4 +33,10 @@ return [
     'error_message'    => '页面错误！请稍后再试～',
     // 显示错误信息
     'show_error_msg'   => true,
+
+    'tmpl_cache_on'   => false,  // 默认开启模板编译缓存 false 的话每次都重新编译模板
+
+    'action_cache_on'  => false,  // 默认关闭Action 缓存
+
+    'html_cache_on'   => false,   // 默认关闭静态缓存
 ];

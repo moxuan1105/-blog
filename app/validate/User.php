@@ -10,6 +10,7 @@ class User extends Validate
         'name' => 'require|max:25', 
         'age' => 'number|between:1,120', 
         'email' => 'email',
+        'password'=>'max:16'
     ];
 
     protected $message = [ 
@@ -19,4 +20,6 @@ class User extends Validate
         'age.between' => '年龄只能在1-120之间', 
         'email' => '邮箱格式错误', 
     ];
+
+
 }

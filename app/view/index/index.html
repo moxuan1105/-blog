@@ -1,94 +1,199 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>layout 后台大布局 - Layui</title>
-  <!-- <link rel="stylesheet" href="../src/css/layui.css"> -->
-  {css href="/static/layui/css/layui.css" /}
-  {js href="/static/layui/layui.js" /}
+	<meta charset="utf-8">
+	<title>姚海清</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {css href='/static/blog/css/swiper.css' /}
+    {css href='/static/blog/css/base.css' /}
+    {css href='/static/blog/css/index.css' /}
+    {css href='/static/blog/css/m.css' /}
+    {css href='/static/blog/css/main.css' /}
+    {css href='/static/blog/assets/waifu.css' /}
+	<!-- waifu-tips.js 依赖 JQuery 库 -->
+    {js href="/static/blog/assets/jquery.min.js" /}
+    {js href="/static/blog/assets/jquery-ui.min.js" /}
+	<!-- 实现拖动效果，需引入 JQuery UI -->
+    {js href="/static/blog/assets/waifu-tips.js?v=1.4.2" /}
+    {js href="/static/blog/assets/live2d.min.js?v=1.0.5" /}
+    {js href="/static/blog/js/swiper.js" /}
+
+	<script>
+		window.onload = function () {
+			var oH2 = document.getElementsByTagName("h2")[0];
+			var oUl = document.getElementsByTagName("ul")[0];
+			oH2.onclick = function () {
+				var style = oUl.style;
+				style.display = style.display == "block" ? "none" : "block";
+				oH2.className = style.display == "block" ? "open" : ""
+			}
+		}
+	</script>
 </head>
-<body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-  <div class="layui-header">
-    <div class="layui-logo">layui 后台布局</div>
-    <!-- 头部区域（可配合layui已有的水平导航） -->
-    <ul class="layui-nav layui-layout-left">
-      <li class="layui-nav-item"><a href="">控制台</a></li>
-      <li class="layui-nav-item"><a href="">商品管理</a></li>
-      <li class="layui-nav-item"><a href="">用户</a></li>
-      <li class="layui-nav-item">
-        <a href="javascript:;">其它系统</a>
-        <dl class="layui-nav-child">
-          <dd><a href="">邮件管理</a></dd>
-          <dd><a href="">消息管理</a></dd>
-          <dd><a href="">授权管理</a></dd>
-        </dl>
-      </li>
-    </ul>
-    <ul class="layui-nav layui-layout-right">
-      <li class="layui-nav-item">
-        <a href="javascript:;">
-          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-          贤心
-        </a>
-        <dl class="layui-nav-child">
-          <dd><a href="">基本资料</a></dd>
-          <dd><a href="">安全设置</a></dd>
-        </dl>
-      </li>
-      <li class="layui-nav-item"><a href="">退了</a></li>
-    </ul>
-  </div>
-  
-  <div class="layui-side layui-bg-black">
-    <div class="layui-side-scroll">
-      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-      <ul class="layui-nav layui-nav-tree" >
-        <li class="layui-nav-item">
-          <a href="javascript:;">所有商品</a>
-          <dl class="layui-nav-child">
-            <dd><a href="{:url('/Login/index')}" target="main">列表一</a></dd>
-            <dd><a href="javascript:;">列表二</a></dd>
-            <dd><a href="javascript:;">列表三</a></dd>
-            <dd><a href="aaa.html">超链接</a></dd>
-          </dl>
-        </li>
-        <li class="layui-nav-item">
-          <a href="javascript:;">解决方案</a>
-          <dl class="layui-nav-child">
-            <dd><a href="javascript:;">列表一</a></dd>
-            <dd><a href="javascript:;">列表二</a></dd>
-            <dd><a href="">超链接</a></dd>
-          </dl>
-        </li>
-        <li class="layui-nav-item"><a href="">云市场</a></li>
-        <li class="layui-nav-item"><a href="">发布商品</a></li>
-      </ul>
+
+<body>
+	<header>
+		<div class="tophead">
+			<div class="logo"><a href="/">个人博客</a></div>
+			<div id="mnav">
+				<h2><span class="navicon"></span></h2>
+				<ul>
+					<li><a href="index.html">网站首页</a></li>
+					<li><a href="about.html">关于我</a></li>
+					<li><a href="share.html">分享</a></li>
+					<li><a href="list.html">列表</a></li>
+					<li><a href="info.html">信息</a></li>
+					<li><a href="gbook.html">好书</a></li>
+				</ul>
+			</div>
+			<nav class="topnav" id="topnav">
+				<ul>
+					<li><a href="index.html">网站首页</a></li>
+					<li><a href="about.html">关于我</a></li>
+					<li><a href="share.html">分享</a></li>
+					<li><a href="list.html">列表</a></li>
+					<li><a href="info.html">信息</a></li>
+					<li><a href="http://localhost/bloghtml/gbook.html">好书</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<article class="container">
+		<div class="blogs">
+			<li> <span class="blogpic"><a href="/"><img src="images/text02.jpg"></a></span>
+				<h3 class="blogtitle"><a href="http://localhost/bloghtml/gbook.html">陌上花开，可缓缓归矣</a></h3>
+				<div class="bloginfo">
+					<p>陌上花开，可缓缓归矣...</p>
+				</div>
+				<div class="autor"><span class="lm"><a href="/" title="CSS3|Html5" target="_blank" class="classname">CSS3|Html5</a></span><span
+					 class="dtime">2018-05-04</span><span class="viewnum">陌上花开，可缓缓归矣陌上花开，矣<a href="/">0</a>陌上花开，可缓缓归矣陌上花开，可缓缓归矣</span><span
+					 class="readmore"><a href="/">陌上花开，可缓缓归矣Ķ陌上花开，</a></span></div>
+			</li>
+			<li> <span class="blogpic"><a href="/"><img src="images/text01.jpg"></a></span>
+				<h3 class="blogtitle"><a href="/">陌上花开，可缓缓归矣</a></h3>
+				<div class="bloginfo">
+					<p>陌上花开，可缓缓归矣...</p>
+				</div>
+				<div class="autor"><span class="lm"><a href="/" title="CSS3|Html5" target="_blank" class="classname">CSS3|Html5</a></span><span
+					 class="dtime">2018-05-04</span><span class="viewnum">陌上花开，可缓缓归矣陌上花归矣<a href="/">0</a>陌上开，可缓缓归矣</span><span class="readmore"><a
+						 href="/">陌上花陌上花开，可缓缓归矣陌上花开，可缓缓归矣</a></span></div>
+			</li>
+			<li> <span class="blogpic"><a href="/"><img src="images/zd03.jpg"></a></span>
+				<h3 class="blogtitle"><a href="/">陌上花开，可缓缓归矣</a></h3>
+				<div class="bloginfo">
+					<p>陌上花开，可缓缓归矣...</p>
+				</div>
+				<div class="autor"><span class="lm"><a href="/" title="CSS3|Html5" target="_blank" class="classname">CSS3|Html5</a></span><span
+					 class="dtime">2018-05-04</span><span class="viewnum">陌上花开，可缓缓归矣<a href="/">0</a>陌上花开，可缓缓归矣</span><span class="readmore"><a
+						 href="/">陌上花开，可缓缓归矣</a></span></div>
+			</li>
+			<li> <span class="blogpic"><a href="/"><img src="images/zd01.jpg"></a></span>
+				<h3 class="blogtitle"><a href="/">陌上花开，可缓缓归矣</a></h3>
+				<div class="bloginfo">
+					<p>陌上花开，可缓缓归矣...</p>
+				</div>
+			</li>
+			<li> <span class="blogpic"><a href="/"><img src="images/text01.jpg"></a></span>
+				<h3 class="blogtitle"><a href="/">陌上花开，可缓缓归矣</a></h3>
+				<div class="bloginfo">
+					<p>陌上花开，可缓缓归矣...</p>
+				</div>
+				<div class="autor"><span class="lm"><a href="/" title="CSS3|Html5" target="_blank" class="classname">CSS3|Html5</a></span><span
+					 class="dtime">2018-05-04</span><span class="viewnum">陌上花开，可缓缓归矣陌上花归矣<a href="/">0</a>陌上开，可缓缓归矣</span><span class="readmore"><a
+						 href="/">陌上花陌上花开，可缓缓归矣陌上花开，可缓缓归矣</a></span></div>
+			</li>
+			<li> <span class="blogpic"><a href="/"><img src="images/zd03.jpg"></a></span>
+				<h3 class="blogtitle"><a href="/">陌上花开，可缓缓归矣</a></h3>
+				<div class="bloginfo">
+					<p>陌上花开，可缓缓归矣...</p>
+				</div>
+				<div class="autor"><span class="lm"><a href="/" title="CSS3|Html5" target="_blank" class="classname">CSS3|Html5</a></span><span
+					 class="dtime">2018-05-04</span><span class="viewnum">陌上花开，可缓缓归矣<a href="/">0</a>陌上花开，可缓缓归矣</span><span class="readmore"><a
+						 href="/">陌上花开，可缓缓归矣</a></span></div>
+			</li>
+			<li> <span class="blogpic"><a href="/"><img src="images/zd01.jpg"></a></span>
+				<h3 class="blogtitle"><a href="/">陌上花开，可缓缓归矣</a></h3>
+				<div class="bloginfo">
+					<p>陌上花开，可缓缓归矣...</p>
+				</div>
+			</li>
+			<li> <span class="blogpic"><a href="/"><img src="images/text01.jpg"></a></span>
+				<h3 class="blogtitle"><a href="/">陌上花开，可缓缓归矣</a></h3>
+				<div class="bloginfo">
+					<p>陌上花开，可缓缓归矣...</p>
+				</div>
+				<div class="autor"><span class="lm"><a href="/" title="CSS3|Html5" target="_blank" class="classname">CSS3|Html5</a></span><span
+					 class="dtime">2018-05-04</span><span class="viewnum">陌上花开，可缓缓归矣陌上花归矣<a href="/">0</a>陌上开，可缓缓归矣</span><span class="readmore"><a
+						 href="/">陌上花陌上花开，可缓缓归矣陌上花开，可缓缓归矣</a></span></div>
+			</li>
+			<li> <span class="blogpic"><a href="/"><img src="images/zd03.jpg"></a></span>
+				<h3 class="blogtitle"><a href="/">陌上花开，可缓缓归矣</a></h3>
+				<div class="bloginfo">
+					<p>陌上花开，可缓缓归矣...</p>
+				</div>
+				<div class="autor"><span class="lm"><a href="/" title="CSS3|Html5" target="_blank" class="classname">CSS3|Html5</a></span><span
+					 class="dtime">2018-05-04</span><span class="viewnum">陌上花开，可缓缓归矣<a href="/">0</a>陌上花开，可缓缓归矣</span><span class="readmore"><a
+						 href="/">陌上花开，可缓缓归矣</a></span></div>
+			</li>
+			<li> <span class="blogpic"><a href="/"><img src="images/zd01.jpg"></a></span>
+				<h3 class="blogtitle"><a href="/">陌上花开，可缓缓归矣</a></h3>
+				<div class="bloginfo">
+					<p>陌上花开，可缓缓归矣...</p>
+				</div>
+			</li>
+	</article>
+	<section class="slogan wow bounceInUp" style="background-image: url()">
+            <h3>Garry</h3>
+            <p>
+                One more time , One more chance . </p>
+            <a target="_blank" href="">
+                联系我 </a>
+            <div class="bg"></div>
+        </section>
+    </section>
+	<!-- <script src="js/nav.js"></script> -->
+
+
+
+
+
+	<div class="waifu">
+		<div class="waifu-tips" style="margin-top: 27px;"></div>
+
+		<canvas id="live2d" class="live2d"></canvas>
+
+		<div class="waifu-tool">
+			<span class="fui-home"></span>
+			<span class="fui-chat"></span>
+			<span class="fui-eye"></span>
+			<span class="fui-user"></span>
+			<span class="fui-photo"></span>
+			<span class="fui-info-circle"></span>
+			<span class="fui-cross"></span>
+		</div>
     </div>
-  </div>
-  
-  <div class="layui-body">
-    <!-- 内容主体区域 -->
-    <div style="padding: 15px;">内容主体区域</div>
- 
-    <div class="layui-tab-item layui-show">
-        <iframe  frameborder="0" scrolling="yes" name="main"></iframe>
-    </div>
-          
-  </div>
-  
-  <div class="layui-footer">
-    <!-- 底部固定区域 -->
-    © layui.com - 底部固定区域
-  </div>
-</div>
-<script>
-//JavaScript代码区域
-layui.use('element', function(){
-  var element = layui.element;
-  
-});
-</script>
+
+        {js href="/static/blog/assets/waifu-tips.json?v=1.4.2" /}
+    <script>
+        live2d_settings['modelAPI'] = '//107.182.26.97/live2d_api/';
+        live2d_settings['tipsMessage'] = './assets/waifu-tips.json';
+        // live2d_settings['hitokotoAPI']  = 'localhost'; 
+        live2d_settings['modelId'] = 1; // 默认模型 ID
+        live2d_settings['modelTexturesId'] = 87; // 默认材质 ID
+        live2d_settings['modelStorage'] = true; // 不储存模型 ID
+        live2d_settings['canCloseLive2d'] = true; // 隐藏 关闭看板娘 按钮
+        live2d_settings['canTurnToHomePage'] = false; // 隐藏 返回首页 按钮
+        live2d_settings['waifuSize'] = '300x270'; // 看板娘大小
+        live2d_settings['waifuTipsSize'] = '200x54'; // 提示框大小
+        live2d_settings['waifuFontSize'] = '14px'; // 提示框字体
+        live2d_settings['waifuToolFont'] = '18px'; // 工具栏字体
+        live2d_settings['waifuToolLine'] = '20px'; // 工具栏行高
+        live2d_settings['waifuToolTop'] = '-60px'; // 工具栏顶部边距
+        live2d_settings['waifuDraggable'] = 'axis-x'; // 拖拽样式
+        live2d_settings['waifuEdgeSide'] = 'right:20';
+        live2d_settings['waifuMinWidth'] = 'disable';      // 面页小于 指定宽度 隐藏看板娘，例如 'disable'(禁用), '768px'
+        // live2d_settings['aboutPageUrl'] = 'http://localhost'; // 关于页地址, '{URL 网址}'
+    </script>
 </body>
 </html>
