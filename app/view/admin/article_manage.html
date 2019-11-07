@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {load href="/static/lib/layui/css/layui.css"/}
+    {load href="/static/lib/layui/layui.js"/}
+    <style>
+    .layui-table-cell{
+        height: auto;
+        white-space: normal;
+    }
+    </style>
+</head>
+<body>
+    <h1>文章列表</h1>
+    <table class="layui-table" id="articleTable"></table>
+
+    <script>
+        layui.use(['table','layer'],function(){
+            var table = layui.table;
+            var layer = layui.layer;
+
+            table.render({
+                elem:'#articleTable',
+                url:'{:url(\'api.article/getList\')}',
+                page:true,
+                limit:20,
+                limits:[20,40,60],
+                cols:[[
+                    {type:'numbers',title:'序号'},
+                    {field:'title',title:'标题'},
+                    {field:'image',title:'图片',templet:'#imgTpl'}
+                ]]
+            });
+        });
+    </script>
+    <script type="text/html" id="imgTpl">
+        <img src="{{d.image}}" alt="博客图像">
+    </script>
+</body>
+</html>

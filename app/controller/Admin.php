@@ -32,17 +32,22 @@ class Admin extends BaseController
         return View::fetch();
     }
 
-
-    // 重定向需要带上 return
-    public function test(){
-        if(!session('?username')){
-            // return error('您没有登陆',Route::buildUrl('Login/'));
-            return redirect(Route::buildUrl('Login/'));
-        }
+    public function articleManage()
+    {
+        return View::fetch();
     }
 
-    public function testModel(){
-        $user = User::select();
-        return json($user);
+    public function articleClass(){
+        return View::fetch();
+    }
+
+    /**
+     * 添加文章
+     *
+     * @return void
+     */
+    public function articleAdd()
+    {
+        return View::fetch();
     }
 }

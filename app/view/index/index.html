@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>姚海清</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {css href='/static/blog/css/swiper.css' /}
     {css href='/static/blog/css/base.css' /}
     {css href='/static/blog/css/index.css' /}
@@ -13,8 +13,9 @@
     {css href='/static/blog/assets/waifu.css' /}
 	<!-- waifu-tips.js 依赖 JQuery 库 -->
     {js href="/static/blog/assets/jquery.min.js" /}
-    {js href="/static/blog/assets/jquery-ui.min.js" /}
 	<!-- 实现拖动效果，需引入 JQuery UI -->
+    {js href="/static/blog/assets/jquery-ui.min.js" /}
+    
     {js href="/static/blog/assets/waifu-tips.js" /}
     {js href="/static/blog/assets/live2d.min.js" /}
     {js href="/static/blog/js/swiper.js" /}
@@ -143,20 +144,6 @@
 				</div>
 			</li>
 	</article>
-	<section class="slogan wow bounceInUp" style="background-image: url()">
-            <h3>Garry</h3>
-            <p>
-                One more time , One more chance . </p>
-            <a target="_blank" href="">
-                联系我 </a>
-            <div class="bg"></div>
-        </section>
-    </section>
-	<!-- <script src="js/nav.js"></script> -->
-
-
-
-
 
 	<div class="waifu">
 		<div class="waifu-tips" style="margin-top: 27px;"></div>
@@ -176,11 +163,13 @@
 
     <script>
         live2d_settings['modelAPI'] = '//107.182.26.97/live2d_api/';
-        live2d_settings['tipsMessage'] = '/static/blog/assets/waifu-tips.json';
+        // live2d_settings['tipsMessage'] = '/static/blog/assets/waifu-tips.json';
+        live2d_settings['hitokotoAPI'] = 'hitokoto.cn'; 
         // live2d_settings['hitokotoAPI']  = 'localhost'; 
         live2d_settings['modelId'] = 1; // 默认模型 ID
         live2d_settings['modelTexturesId'] = 87; // 默认材质 ID
         live2d_settings['modelStorage'] = true; // 不储存模型 ID
+        live2d_settings['modelRandMode'] = 'rand';     // 模型切换，可选 'rand'(随机), 'switch'(顺序)
         live2d_settings['canCloseLive2d'] = true; // 隐藏 关闭看板娘 按钮
         live2d_settings['canTurnToHomePage'] = false; // 隐藏 返回首页 按钮
         live2d_settings['waifuSize'] = '300x270'; // 看板娘大小
@@ -189,9 +178,10 @@
         live2d_settings['waifuToolFont'] = '18px'; // 工具栏字体
         live2d_settings['waifuToolLine'] = '20px'; // 工具栏行高
         live2d_settings['waifuToolTop'] = '-60px'; // 工具栏顶部边距
-        live2d_settings['waifuDraggable'] = 'axis-x'; // 拖拽样式
+        live2d_settings['waifuDraggable'] = 'unlimited'; // 拖拽样式
+        live2d_settings['waifuDraggableRevert'] = false;         // 松开鼠标还原拖拽位置，可选 true(真), false(假)
         live2d_settings['waifuEdgeSide'] = 'right:20';
-        live2d_settings['waifuMinWidth'] = 'disable';      // 面页小于 指定宽度 隐藏看板娘，例如 'disable'(禁用), '768px'
+        live2d_settings['waifuMinWidth'] = '768px';      // 面页小于 指定宽度 隐藏看板娘，例如 'disable'(禁用), '768px'
 
         initModel("/static/blog/assets/waifu-tips.json")
     </script>

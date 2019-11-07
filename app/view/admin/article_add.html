@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {load href="/static/lib/layui/css/layui.css"/}
+    {load href="/static/lib/layui/layui.js"/}
+</head>
+
+<body>
+
+
+    <div class="layui-fluid">
+        <div class="layui-card layui-row">
+            <div class="layui-card-body layui-col-md8 layui-col-md-offset2">
+                <form class="layui-form layui-col-space5">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">标题栏</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+                                autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">复选框</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="like[write]" title="写作">
+                            <input type="checkbox" name="like[read]" title="阅读" checked>
+                            <input type="checkbox" name="like[dai]" title="发呆">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">富文本</label>
+                        <div class="layui-input-block">
+                            <textarea name="desc" id='editDemo' placeholder="请输入内容" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //Demo
+        layui.use(['form','layedit'], function () {
+            var form = layui.form;
+            var layedit = layui.layedit;
+            layedit.set({
+                height:800,
+                uploadImage: {
+                    url: '{:url(\'Upload/images\')}' //接口url
+                    ,type: 'post' //默认post
+                }
+            });
+            layedit.build('editDemo');
+
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>
