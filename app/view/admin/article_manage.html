@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     {load href="/static/lib/layui/css/layui.css"/}
+    {load href="/static/js/jquery-3.4.1.js"/}
     {load href="/static/lib/layui/layui.js"/}
     <style>
     .layui-table-cell{
@@ -16,7 +17,7 @@
 </head>
 <body>
     <h1>文章列表</h1>
-    <table class="layui-table" id="articleTable"></table>
+    <table class="layui-table" id="articleTable" lay-filter="articleTableFilter"></table>
 
     <script>
         layui.use(['table','layer'],function(){
@@ -25,20 +26,69 @@
 
             table.render({
                 elem:'#articleTable',
-                url:'{:url(\'api.article/getList\')}',
+                url:'{:url(\'Article/getList\')}',
+                height:'full-100',
                 page:true,
                 limit:20,
                 limits:[20,40,60],
+                even: true, //开启隔行背景
+                // size: 'lg', //小尺寸的表格
                 cols:[[
-                    {type:'numbers',title:'序号'},
-                    {field:'title',title:'标题'},
-                    {field:'image',title:'图片',templet:'#imgTpl'}
+                    {type:'numbers',title:'序号',align:'center'},
+                    {field:'title',title:'标题',align:'left'},
+                    {field:'image',title:'图片',templet:'#imgTpl',align:'center',width:140},
+                    {field:'create_time',title:'创建时间',align:'center'},
+                    {field:'update_time',title:'更新时间',align:'center'},
+                    {title:'操作',toolbar:'#actionTool',align:'center'}
                 ]]
+            });
+
+            //监听工具条 
+            table.on('tool(articleTableFilter)', function(obj){ 
+                var data = obj.data; 
+                var layEvent = obj.event; 
+                var tr = obj.tr; 
+                
+                if(layEvent === 'del'){ //删除
+                    console.log(data);
+                    // return false;
+                    layer.confirm('真的删除行么', function(index){
+                        obj.del();
+                        $.ajax({
+                            url:'{:url(\'Article/delete\')}',
+                            type:'post',
+                            data:{
+                                id:data.id
+                            },
+                            dataType:'json',
+                            success:function(sucData){
+                                console.log('success',sucData);
+                            },
+                            error:function(errorData){
+                                console.log('error',errorData);
+                            }
+                        });
+                        layer.close(index);
+                    });
+                } else if(layEvent === 'edit'){ //编辑
+                    //do something
+                    //同步更新缓存对应的值
+                    obj.update({
+                    username: '123'
+                    ,title: 'xxx'
+                    });
+                } else if(layEvent === 'LAYTABLE_TIPS'){
+                    layer.alert('Hi，头部工具栏扩展的右侧图标。');
+                }
             });
         });
     </script>
     <script type="text/html" id="imgTpl">
         <img src="{{d.image}}" alt="博客图像">
     </script>
+    <script type="text/html" id="actionTool">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+      </script>
 </body>
 </html>

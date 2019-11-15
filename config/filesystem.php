@@ -15,9 +15,9 @@ return [
             // 磁盘类型
             'type'       => 'local',
             // 磁盘路径
-            'root'       => app()->getRootPath() . 'public/update',
+            'root'       => app()->getRootPath() . 'public/upload',
             // 磁盘路径对应的外部URL路径
-            'url'        => '/update',
+            'url'        => '/upload',
             // 可见性
             'visibility' => 'public',
         ],

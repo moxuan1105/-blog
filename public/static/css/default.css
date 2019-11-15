@@ -1,0 +1,105 @@
+body { 
+    width:100%; 
+    height:100%; 
+    overflow-x:hidden; 
+}
+
+header {
+    position:fixed;
+    top: 0px;
+    z-index: 9999;
+    width: 100%;
+    background-color: #ffffff66;
+    /* background-color: #fff; */
+    height: 70px;
+    line-height: 70px;
+    font-size: 16px;
+}
+
+header .logo, .nav, .welcome-text{
+    position:absolute;
+    top:0px;
+}
+
+header .logo{
+    left: 60px;
+}
+
+header .nav {
+    left: 250px;
+}
+
+header .nav a {
+    color: #3f2863;
+    margin: 0 50px;
+}
+
+header .nav a.active {
+    color: #ff7f21;
+}
+
+header .welcome-text {
+    right: 50px;
+}
+
+.content{
+    width: 70%;
+    margin: 0 auto;
+    position:relative;
+    top:90px;
+}
+
+.content li { 
+    margin-bottom: 10px; 
+    overflow: hidden; 
+    padding: 20px; 
+    background: #fff 
+}
+
+.blogpic { 
+    overflow: hidden; 
+    width: 30%; 
+    display: block; 
+    float: left; 
+    margin-right: 20px; 
+    border-radius: 5px;
+}
+
+.content li img{ 
+    width: 100%;
+}
+
+h3.blogtitle { 
+    line-height: 30px; 
+    height: 30px; 
+    margin: 10px 0; 
+}
+
+.bloginfo p { 
+    color: #888; 
+    line-height: 24px 
+}
+
+.autor { 
+    width: 100%; 
+    overflow: hidden; 
+    clear: both; 
+    margin: 20px 0 0 0; 
+    display: inline-block; 
+    color: #838383; 
+    font-size: 12px 
+}
+
+.autor span { 
+    margin-right: 10px; 
+    padding-left: 20px; 
+}
+
+.autor span a { 
+    color: #096; 
+}
+
+.autor span a:hover { 
+    text-decoration: underline 
+}
+

@@ -1,0 +1,161 @@
+<div class="waifu">
+	<div class="waifu-tips" style="margin-top: 27px;"></div>
+
+	<canvas id="live2d" class="live2d"></canvas>
+
+	<div class="waifu-tool">
+        <span class="fui-home"></span>
+        <span class="fui-chat"></span>
+        <span class="fui-eye"></span>
+        <span class="fui-user"></span>
+        <span class="fui-photo"></span>
+        <span class="fui-info-circle"></span>
+        <span class="fui-cross"></span>
+    </div>
+</div>
+
+<script>
+    live2d_settings['modelAPI'] = '//107.182.26.97/live2d_api/';
+    live2d_settings['hitokotoAPI'] = 'hitokoto.cn'; 
+    
+    live2d_settings['modelId'] = 1; // 默认模型 ID
+    live2d_settings['modelTexturesId'] = 87; // 默认材质 ID
+    live2d_settings['modelStorage'] = true; // 不储存模型 ID
+    live2d_settings['modelRandMode'] = 'rand';     // 模型切换，可选 'rand'(随机), 'switch'(顺序)
+    live2d_settings['canCloseLive2d'] = true; // 隐藏 关闭看板娘 按钮
+    live2d_settings['canTurnToHomePage'] = false; // 隐藏 返回首页 按钮
+    live2d_settings['waifuSize'] = '300x270'; // 看板娘大小
+    live2d_settings['waifuTipsSize'] = '200x54'; // 提示框大小
+    live2d_settings['waifuFontSize'] = '14px'; // 提示框字体
+    live2d_settings['waifuToolFont'] = '18px'; // 工具栏字体
+    live2d_settings['waifuToolLine'] = '20px'; // 工具栏行高
+    live2d_settings['waifuToolTop'] = '-60px'; // 工具栏顶部边距
+    live2d_settings['waifuDraggable'] = 'unlimited'; // 拖拽样式
+    live2d_settings['waifuDraggableRevert'] = false;         // 松开鼠标还原拖拽位置，可选 true(真), false(假)
+    live2d_settings['waifuEdgeSide'] = 'right:20';
+    live2d_settings['waifuMinWidth'] = '768px';      // 面页小于 指定宽度 隐藏看板娘，例如 'disable'(禁用), '768px'
+
+    initModel("/static/blog/assets/waifu-tips.json")
+</script>
+
+<script>
+    layui.use(['flow'],function(){
+        var flow = layui.flow;
+        //当你执行这样一个方法时，即对页面中的全部带有lay-src的img元素开启了懒加载（当然你也可以指定相关img）
+        flow.lazyimg(); 
+    })
+
+</script>
+<div style="position: fixed;z-index: -1;top: 0px;">
+    <canvas id="c" width="300" height="150"></canvas>   
+</div>
+ 
+<script type="text/javascript">		
+$(document).ready(function() {			
+	var canvas = document.getElementById("c");
+	var ctx = canvas.getContext("2d");
+	var c = $("#c");
+	var w,h;
+	var pi = Math.PI;
+	var all_attribute = {
+		num:100,            			 // 个数
+		start_probability:0.1,		     // 如果数量小于num，有这些几率添加一个新的     		     
+		radius_min:1,   			     // 初始半径最小值
+		radius_max:2,   			     // 初始半径最大值
+		radius_add_min:.3,               // 半径增加最小值
+		radius_add_max:.5,               // 半径增加最大值
+		opacity_min:0.3,                 // 初始透明度最小值
+		opacity_max:0.5, 				 // 初始透明度最大值
+		opacity_prev_min:.003,            // 透明度递减值最小值
+		opacity_prev_max:.005,            // 透明度递减值最大值
+		light_min:40,                 // 颜色亮度最小值
+		light_max:70,                 // 颜色亮度最大值
+	};
+	var style_color = find_random(0,360);  
+	var all_element =[];
+	window_resize();
+	function start(){
+		window.requestAnimationFrame(start);
+		style_color+=.1;
+		ctx.fillStyle = 'hsl('+style_color+',100%,97%)';
+		ctx.fillRect(0, 0, w, h);
+		if (all_element.length < all_attribute.num && Math.random() < all_attribute.start_probability){
+			all_element.push(new ready_run);
+		}
+		all_element.map(function(line) {
+			line.to_step();
+		})
+	}
+	function ready_run(){
+		this.to_reset();
+	}
+	ready_run.prototype = {
+		to_reset:function(){
+			var t = this;
+			t.x = find_random(0,w);
+			t.y = find_random(0,h);
+			t.radius = find_random(all_attribute.radius_min,all_attribute.radius_max);
+			t.radius_change = find_random(all_attribute.radius_add_min,all_attribute.radius_add_max);
+			t.opacity = find_random(all_attribute.opacity_min,all_attribute.opacity_max);
+			t.opacity_change = find_random(all_attribute.opacity_prev_min,all_attribute.opacity_prev_max);
+			t.light = find_random(all_attribute.light_min,all_attribute.light_max);
+			t.color = 'hsl('+style_color+',100%,'+t.light+'%)';
+		},
+		to_step:function(){
+			var t = this;
+			t.opacity -= t.opacity_change;
+			t.radius += t.radius_change;
+			if(t.opacity <= 0){
+				t.to_reset();
+				return false;
+			}
+			ctx.fillStyle = t.color;
+			ctx.globalAlpha = t.opacity;
+			ctx.beginPath();
+			ctx.arc(t.x,t.y,t.radius,0,2*pi,true);
+			ctx.closePath();
+			ctx.fill();
+			ctx.globalAlpha = 1;
+		}
+	}
+	function window_resize(){
+		w = window.innerWidth;
+		h = window.innerHeight;
+		canvas.width = w;
+		canvas.height = h;
+	}
+	$(window).resize(function(){
+		window_resize();
+	});
+	function find_random(num_one,num_two){
+		return Math.random()*(num_two-num_one)+num_one;
+	}
+	(function() {
+		var lastTime = 0;
+		var vendors = ['webkit', 'moz'];
+		for(var xx = 0; xx < vendors.length && !window.requestAnimationFrame; ++xx) {
+			window.requestAnimationFrame = window[vendors[xx] + 'RequestAnimationFrame'];
+			window.cancelAnimationFrame = window[vendors[xx] + 'CancelAnimationFrame'] ||
+										  window[vendors[xx] + 'CancelRequestAnimationFrame'];
+		}
+	
+		if (!window.requestAnimationFrame) {
+			window.requestAnimationFrame = function(callback, element) {
+				var currTime = new Date().getTime();
+				var timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
+				var id = window.setTimeout(function() {
+					callback(currTime + timeToCall);
+				}, timeToCall);
+				lastTime = currTime + timeToCall;
+				return id;
+			};
+		}
+		if (!window.cancelAnimationFrame) {
+			window.cancelAnimationFrame = function(id) {
+				clearTimeout(id);
+			};
+		}
+	}());
+	start();
+});
+</script>

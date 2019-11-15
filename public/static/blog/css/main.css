@@ -1,0 +1,25 @@
+body {
+    background-color: transparent;
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: right top;
+    /* background-image: url('../images/dva.jpg'); */
+    background-repeat:repeat-x ;
+    background-position-x: 1000px;
+}
+
+header{
+    position: fixed;
+    top:0px;
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 70px;
+}
+
+article {
+    margin-top: 75px;
+}
+
+.blogs>li{
+    background-color: rgba(255, 255, 255, 0.9);
+}

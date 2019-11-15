@@ -18,30 +18,21 @@
             <div class="layui-card-body layui-col-md8 layui-col-md-offset2">
                 <form class="layui-form layui-col-space5">
                     <div class="layui-form-item">
-                        <label class="layui-form-label">标题栏</label>
+                        <label class="layui-form-label">标题</label>
                         <div class="layui-input-block">
                             <input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
                                 autocomplete="off" class="layui-input">
                         </div>
                     </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">复选框</label>
-                        <div class="layui-input-block">
-                            <input type="checkbox" name="like[write]" title="写作">
-                            <input type="checkbox" name="like[read]" title="阅读" checked>
-                            <input type="checkbox" name="like[dai]" title="发呆">
-                        </div>
-                    </div>
                     <div class="layui-form-item layui-form-text">
-                        <label class="layui-form-label">富文本</label>
+                        <label class="layui-form-label">文章内容</label>
                         <div class="layui-input-block">
-                            <textarea name="desc" id='editDemo' placeholder="请输入内容" class="layui-textarea"></textarea>
+                            <textarea id='editDemo' placeholder="请输入内容" class="layui-textarea"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
                             <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                         </div>
                     </div>
                 </form>
@@ -51,21 +42,50 @@
 
     <script>
         //Demo
-        layui.use(['form','layedit'], function () {
+        layui.use(['form','layedit','jquery'], function () {
             var form = layui.form;
             var layedit = layui.layedit;
+            var $ = layui.jquery;
+
             layedit.set({
-                height:800,
+                height:900,
+                // 选择图片的文件上传信息
                 uploadImage: {
                     url: '{:url(\'Upload/images\')}' //接口url
                     ,type: 'post' //默认post
                 }
             });
-            layedit.build('editDemo');
+            var editIndex = layedit.build('editDemo');
 
             //监听提交
             form.on('submit(formDemo)', function (data) {
-                layer.msg(JSON.stringify(data.field));
+                // layer.msg(JSON.stringify(data.field));
+                console.log(data);
+                console.log(layedit.getContent(editIndex));
+                // console.log(layedit.getText(editIndex));
+                var titleValue = data.field.title;
+                var contentValue = layedit.getContent(editIndex);
+                // var dataArray = [titleValue,contentValue];
+                $.ajax({
+                    url:'{:url(\'Article/add\')}',
+                    type:'post',
+                    data:{
+                        title:titleValue,
+                        contentValue:contentValue
+                    },
+                    dataType:'json',
+                    success:function(sucData){
+                        // console.log(sucData);
+                        if(sucData === true){
+                            layer.alert('success');
+                        }
+                    },
+                    error:function(errorData){
+                        console.log(errorData);
+                        layer.alert('error');
+
+                    }
+                });
                 return false;
             });
         });
