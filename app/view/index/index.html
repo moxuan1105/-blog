@@ -1,31 +1,74 @@
-{foreach $data as $key=>$vo}
-<ul>
-    <li> 
-        <span class="blogpic">
-            <img src="{$vo.image}">
-        </span>
-        <h3 class="blogtitle">
-            <a href="{:url('Index/showArticleInfo',['id'=>$vo.id])}">
-                {$vo.title}
-            </a>
-        </h3>
-        <div class="bloginfo">
-            <p>陌上花开，可缓缓归矣...</p>
+<div class="layui-carousel" id="blogCarousel">
+    <div carousel-item>
+        {foreach $data as $key=>$vo}
+        {if((int)$key < 5)}
+        <div class="blogCarouselContent">
+            <div class="blogCarouselImg">
+                <a href="{:url('Index/showArticleInfo',['id'=>$vo.id])}">
+                    <img lay-src="{$vo.image}" height="100%">
+                </a>
+                <div class="blogCarouselTitle">
+                    {$vo.title}
+                </div>
+            </div>
         </div>
-        <div class="autor">
-            <span class="lm layui-icon layui-icon-list">
-                <a href="/" title="CSS3|Html5" target="_blank" class="classname">CSS3|Html5</a>
+        {/if}
+        {/foreach}
+    </div>
+</div>
+{foreach $data as $key=>$vo}
+<ul class="blogContent">
+    <li class="layui-row layui-col-space16"> 
+        <div class="layui-col-md4">
+            <span class="blogpic">
+                <img lay-src="{$vo.image}">             
             </span>
-            <span class="dtime layui-icon layui-icon-date">
-                {$vo.update_time}
-            </span>
-            <span class="viewnum layui-icon layui-icon-log">
-                <a href="/">{$vo.read}</a>
-            </span>
-            <span class="readmore">
-                <a href="/">陌上花开，可缓缓归矣</a>
-            </span>
+        </div>
+        <div class="layui-col-md8">
+            <div class="layui-row layui-col-md12">
+                <h3 class="blogtitle">
+                    <a href="{:url('Index/showArticleInfo',['id'=>$vo.id])}">
+                        {$vo.title}
+                    </a>
+                </h3>
+                <div class="bloginfo layui-col-md12">
+                    <p>陌上花开，可缓缓归矣...</p>
+                </div>
+            </div>
+        </div>
+        <div class="autor layui-col-md12">
+            <div class="layui-row">
+                <span class="lm layui-icon layui-icon-list layui-col-md2">
+                    <a href="/" title="CSS3|Html5" target="_blank" class="classname">CSS3|Html5</a>
+                </span>
+                <span class="dtime layui-icon layui-icon-date  layui-col-md3">
+                    {$vo.update_time}
+                </span>
+                <span class="viewnum layui-icon layui-icon-log layui-col-md1">
+                    <a href="/">{$vo.read}</a>
+                </span>
+                <span class="readmore layui-col-md4">
+                    <a href="/">陌上花开，可缓缓归矣</a>
+                </span>
+            </div>
         </div>
     </li>
 </ul>
 {/foreach}
+<script>
+    layui.use(['carousel'], function(){
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#blogCarousel',
+            width: '100%', //设置容器宽度
+            height:'300px',
+            anim: 'default', //切换动画方式
+            // indicator:'inside',
+            indicator:'none',
+            autoplay:true,
+            interval:10000,
+            arrow:'hover'
+        });
+    });
+</script>

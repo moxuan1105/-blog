@@ -39,34 +39,76 @@ header .nav a.active {
 }
 
 header .welcome-text {
-    right: 50px;
+    right: 40px;
+}
+
+#blogCarousel{
+    margin-bottom: 10px;
+    background: #ffffff00;
+}
+
+.layui-carousel>[carousel-item]>* {
+    transition-duration: 1s;
+}
+
+#blogCarousel>[carousel-item]>.blogCarouselContent{
+    background-color: #ffffff00;
+}
+
+.blogCarouselImg{
+    height: 100%;
+    text-align: center;
+    background: #ffffff00;
+
+}
+
+.blogCarouselTitle{
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+    background: #00000026;
+    width: 100%;
+    height: 25%;
+    z-index: 1;
+    height: 70px;
+    line-height: 70px;
+    font-size: 16px;
+    user-select:none;
+    color:#fff;
+}
+
+.layui-carousel-ind li{
+    padding: 0px!important;
 }
 
 .content{
     width: 70%;
-    margin: 0 auto;
+    margin: 0 auto; 
     position:relative;
     top:90px;
 }
 
-.content li { 
+.blogContent li { 
     margin-bottom: 10px; 
     overflow: hidden; 
     padding: 20px; 
-    background: #fff 
+    background: #ffffff66;
+    height: 210px;
 }
 
 .blogpic { 
     overflow: hidden; 
-    width: 30%; 
+    /* width: 30%;  */
     display: block; 
     float: left; 
     margin-right: 20px; 
     border-radius: 5px;
+    height: 180px;
 }
 
-.content li img{ 
+.blogContent li img{ 
     width: 100%;
+    overflow: hidden;
 }
 
 h3.blogtitle { 
@@ -84,7 +126,7 @@ h3.blogtitle {
     width: 100%; 
     overflow: hidden; 
     clear: both; 
-    margin: 20px 0 0 0; 
+    margin: 10px 0 0 0; 
     display: inline-block; 
     color: #838383; 
     font-size: 12px 

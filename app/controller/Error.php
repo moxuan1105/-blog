@@ -9,4 +9,13 @@ class Error {
         return View::fetch('error/index');
         // return 'error request!';
     }
+
+    //其他控制器也加上——empty方法
+    public function _empty()
+    {
+        // View::layout(true);
+        // return View::fetch();  
+        return '找不到当前的方法';
+    }
+    
 }

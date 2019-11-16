@@ -13,7 +13,7 @@ class Index extends BaseController
 {
     public function index()
     {
-        $articleInfo = ArticleModel::withoutField(['article','delete_time'])->select();
+        $articleInfo = ArticleModel::withoutField(['article','delete_time'])->order(['id'=>'desc'])->select();
         View::assign('data',$articleInfo);
         View::layout(true);
         return View::fetch();
@@ -41,4 +41,12 @@ class Index extends BaseController
         return download('update/images/1c/4d1199812eb27c0eaa35053fa28d41.jpeg','aaa',true,180);
     }
 
-}
+    //其他控制器也加上——empty方法
+    public function _empty()
+    {
+        // View::layout(true);
+        // return View::fetch();  
+        return '找不到当前的方法';
+    }
+
+}   

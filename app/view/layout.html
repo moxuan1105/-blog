@@ -5,9 +5,9 @@
 	<meta charset="utf-8">
 	<title>姚海清</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {css href='/static/css/default.css'/}
     {css href='/static/blog/assets/waifu.css' /}
     {css href='/static/lib/layui/css/layui.css'}
+    {css href='/static/css/default.css'/}
     <!-- waifu-tips.js 依赖 JQuery 库 -->
     {js href='/static/js/jquery-3.4.1.js'}
 	<!-- 实现拖动效果，需引入 JQuery UI -->
@@ -25,7 +25,7 @@
                 <img src="/static/blog/images/logo1.png">
             </a>
         </h1>
-        <div class="nav">
+        <div class="nav layui-hide-xs layui-hide-sm layui-show-md-block">
             <a href="index.html" class="active">文章</a>
             <a href="whisper.html">微语</a>
             <a href="leacots.html">留言</a>
@@ -38,7 +38,7 @@
         </p>
     </header>
 
-    <div class="content">
+    <div class="content layui-fluid">
         {__CONTENT__}
     </div>
 
@@ -46,6 +46,28 @@
         //注意：导航 依赖 element 模块，否则无法进行功能性操作
         layui.use(['element'], function(){
             var element = layui.element;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             // 页面active的标记
             var activeDate = layui.data('active');
@@ -59,14 +81,6 @@
                     $(content).removeClass('active');
                 });
             }
-
-
-
-
-
-
-
-
             // 点击标题，标题替换颜色
             $('.nav a').click(function(e){
                 var thisObj = $(this);
