@@ -1,4 +1,4 @@
-<div class="layui-carousel" id="blogCarousel">
+<div class="layui-carousel " id="blogCarousel">
     <div carousel-item>
         {foreach $data as $key=>$vo}
         {if((int)$key < 5)}
@@ -19,7 +19,7 @@
 {foreach $data as $key=>$vo}
 <ul class="blogContent">
     <li class="layui-row layui-col-space16"> 
-        <div class="layui-col-md4">
+        <div class="layui-col-md4 layui-col-lg3">
             <span class="blogpic">
                 <img lay-src="{$vo.image}">             
             </span>

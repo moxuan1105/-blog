@@ -38,15 +38,13 @@ class Index extends BaseController
 
     public function downloadImages(){
         // 下载方法用不了
-        return download('update/images/1c/4d1199812eb27c0eaa35053fa28d41.jpeg','aaa',true,180);
+        return download('upload/images/1c/4d1199812eb27c0eaa35053fa28d41.jpeg','aaa.jpeg');
     }
 
     //其他控制器也加上——empty方法
-    public function _empty()
-    {
-        // View::layout(true);
-        // return View::fetch();  
-        return '找不到当前的方法';
+    public function miss(){
+        View::layout(true);
+        return View::fetch();
     }
 
 }   

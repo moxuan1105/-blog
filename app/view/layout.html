@@ -21,16 +21,16 @@
 <body>
     <header class="tophead">
         <h1 class="logo">
-            <a href="index.html">
+            <a href="/">
                 <img src="/static/blog/images/logo1.png">
             </a>
         </h1>
         <div class="nav layui-hide-xs layui-hide-sm layui-show-md-block">
-            <a href="index.html" class="active">文章</a>
-            <a href="whisper.html">微语</a>
-            <a href="leacots.html">留言</a>
-            <a href="album.html">相册</a>
-            <a href="about.html">关于</a>
+            <a href="{:url('/')}" class="active">文章</a>
+            <a href="{:url('whisper')}">微语</a>
+            <a href="{:url('leacots')}">留言</a>
+            <a href="{:url('album')}">相册</a>
+            <a href="{:url('about')}">关于</a>
         </div>
 
         <p class="welcome-text">
@@ -38,7 +38,7 @@
         </p>
     </header>
 
-    <div class="content layui-fluid">
+    <div class="layui-col-md10 layui-col-lg8 content layui-fluid layui-col-md-offset1 layui-col-lg-offset2">
         {__CONTENT__}
     </div>
 
