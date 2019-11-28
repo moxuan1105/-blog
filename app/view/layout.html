@@ -5,16 +5,11 @@
 	<meta charset="utf-8">
 	<title>姚海清</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {css href='/static/blog/assets/waifu.css' /}
     {css href='/static/lib/layui/css/layui.css'}
     {css href='/static/css/default.css'/}
-    <!-- waifu-tips.js 依赖 JQuery 库 -->
+
     {js href='/static/js/jquery-3.4.1.js'}
-	<!-- 实现拖动效果，需引入 JQuery UI -->
-    {js href="/static/blog/assets/jquery-ui.min.js" /}
     
-    {js href="/static/blog/assets/waifu-tips.js" /}
-    {js href="/static/blog/assets/live2d.min.js" /}
     {js href='/static/lib/layui/layui.js'}
 </head>
 
@@ -38,7 +33,7 @@
         </p>
     </header>
 
-    <div class="layui-col-md10 layui-col-lg8 content layui-fluid layui-col-md-offset1 layui-col-lg-offset2">
+    <div class="content layui-container">
         {__CONTENT__}
     </div>
 
@@ -46,28 +41,6 @@
         //注意：导航 依赖 element 模块，否则无法进行功能性操作
         layui.use(['element'], function(){
             var element = layui.element;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             // 页面active的标记
             var activeDate = layui.data('active');
@@ -90,6 +63,10 @@
                     // index 表示索引
                     // content 表示内容
                     if($(content).hasClass('active')){
+                        layui.data('active',{
+                            key:'historyActiveValue',
+                            value:$(content).text()
+                        })
                         $(content).removeClass('active');
                     }
                 });
@@ -106,46 +83,6 @@
         });
     </script>
 
-	<div class="waifu">
-		<div class="waifu-tips" style="margin-top: 27px;"></div>
-
-		<canvas id="live2d" class="live2d"></canvas>
-
-		<div class="waifu-tool">
-			<span class="fui-home"></span>
-			<span class="fui-chat"></span>
-			<span class="fui-eye"></span>
-			<span class="fui-user"></span>
-			<span class="fui-photo"></span>
-			<span class="fui-info-circle"></span>
-			<span class="fui-cross"></span>
-		</div>
-    </div>
-
-    <script>
-        live2d_settings['modelAPI'] = '//107.182.26.97/live2d_api/';
-        live2d_settings['hitokotoAPI'] = 'hitokoto.cn'; 
-
-        live2d_settings['modelId'] = 1; // 默认模型 ID
-        live2d_settings['modelTexturesId'] = 87; // 默认材质 ID
-        live2d_settings['modelStorage'] = true; // 不储存模型 ID
-        live2d_settings['modelRandMode'] = 'rand';     // 模型切换，可选 'rand'(随机), 'switch'(顺序)
-        live2d_settings['canCloseLive2d'] = true; // 隐藏 关闭看板娘 按钮
-        live2d_settings['canTurnToHomePage'] = false; // 隐藏 返回首页 按钮
-        live2d_settings['waifuSize'] = '300x270'; // 看板娘大小
-        live2d_settings['waifuTipsSize'] = '200x54'; // 提示框大小
-        live2d_settings['waifuFontSize'] = '14px'; // 提示框字体
-        live2d_settings['waifuToolFont'] = '18px'; // 工具栏字体
-        live2d_settings['waifuToolLine'] = '20px'; // 工具栏行高
-        live2d_settings['waifuToolTop'] = '-60px'; // 工具栏顶部边距
-        live2d_settings['waifuDraggable'] = 'unlimited'; // 拖拽样式
-        live2d_settings['waifuDraggableRevert'] = false;         // 松开鼠标还原拖拽位置，可选 true(真), false(假)
-        live2d_settings['waifuEdgeSide'] = 'right:20';
-        live2d_settings['waifuMinWidth'] = '768px';      // 面页小于 指定宽度 隐藏看板娘，例如 'disable'(禁用), '768px'
-
-        initModel("/static/blog/assets/waifu-tips.json")
-    </script>
-
     <script>
         layui.use(['flow'],function(){
             var flow = layui.flow;
@@ -154,9 +91,9 @@
         })
 
     </script>
-<div style="position: fixed;z-index: -1;top: 0px;">
-    <canvas id="c" width="300" height="150"></canvas>   
-</div>
+    <div style="position: fixed;z-index: -1;top: 0px;">
+        <canvas id="c" width="300" height="150"></canvas>   
+    </div>
  
 <script type="text/javascript">		
 $(document).ready(function() {			

@@ -17,6 +17,7 @@ use think\facade\Route;
 Route::group('index', function () {
     // 定义傻逼路由规则 不定义还不能使用
     Route::rule('showArticleInfo', 'showArticleInfo');
-    Route::rule('/', '/index');
+    // Route::rule('show', 'Index/showArticleInfo');
+    Route::rule('/', 'index');
     Route::miss('miss');
 })->ext('html');

@@ -6,7 +6,14 @@
 </div>
 
 <script>
+    // 强制跳转到首页
     setTimeout(function(){
-        history.back(-1);
+
+        layui.data('active', {
+            key: 'activeValue'
+            ,value: '文章'
+        });
+
+        window.location.href = '{:url("/")}';
     },3000)
 </script>

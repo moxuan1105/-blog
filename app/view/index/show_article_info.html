@@ -1,1 +1,75 @@
-{$data.article|raw}
+<div class="layui-card">
+    <div class="layui-card-header">
+        <h1>{$data.title}</h1>
+    </div>
+    <div class="layui-card-body">
+        {$data.article|raw}
+    </div>
+</div>
+
+<div class="commentAdd">
+    <fieldset class="layui-elem-field">
+        <legend>评论</legend>
+        <form class="layui-form">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <textarea name="comment" class="layui-textarea" lay-verify="required"></textarea>
+                </div>
+                <div class="layui-card-body">
+                    <input name='nickname' class="layui-input nickInput" placeholder="输入昵称" required lay-verify="required">
+                    <input type="hidden" name="articleId" value='{$data.id}'>
+                    <button class="layui-btn commentButton" lay-submit lay-filter="commentSubmit">发布评论</button>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+</div>
+
+<div class="commentList">
+    <fieldset class="layui-elem-field">
+        <legend>评论列表</legend>
+        {for start="0" end="5"}
+        
+        <div class="layui-card commentContent">
+            <div class="layui-card-header">
+                昵称    创建时间    第{$i+1}楼
+            </div>
+            <div class="layui-card-body">
+                评论内容
+                <button data-replyId={$i+1}>回复</button>
+            </div>
+        </div>
+
+        {/for}
+    </fieldset>
+</div>
+
+
+<script>
+    // 按需加载css 
+    layui.link('/static/css/showArticleInfo.css');
+    layui.use(['form','layer'],function(){
+        var form = layui.form;
+        var layer = layui.layer;
+        form.render();
+
+        var replyId = 0;
+
+        form.on('submit(commentSubmit)',function(obj){
+            console.log(obj);
+            var formData = obj.field;
+            formData['replyId'] = replyId;
+            $.ajax({
+                url:"{:url('Article/commentAdd')}",
+                type:'post',
+                data:formData,
+                dataType:'json',
+                success:function(successData){
+                    console.log(successData);
+                    layer.alert(JSON.stringify(successData));
+                }
+            });
+            return false;
+        })
+    });
+</script>

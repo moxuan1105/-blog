@@ -1,10 +1,11 @@
+<!-- 轮播图 -->
 <div class="layui-carousel " id="blogCarousel">
     <div carousel-item>
         {foreach $data as $key=>$vo}
         {if((int)$key < 5)}
         <div class="blogCarouselContent">
             <div class="blogCarouselImg">
-                <a href="{:url('Index/showArticleInfo',['id'=>$vo.id])}">
+                <a href="{:url('showArticleInfo',['id'=>$vo.id])}">
                     <img lay-src="{$vo.image}" height="100%">
                 </a>
                 <div class="blogCarouselTitle">
@@ -16,10 +17,12 @@
         {/foreach}
     </div>
 </div>
+
+<!-- 文章主体内容 -->
 {foreach $data as $key=>$vo}
 <ul class="blogContent">
     <li class="layui-row layui-col-space16"> 
-        <div class="layui-col-md4 layui-col-lg3">
+        <div class="layui-col-md4 layui-col-lg4">
             <span class="blogpic">
                 <img lay-src="{$vo.image}">             
             </span>
@@ -27,7 +30,7 @@
         <div class="layui-col-md8">
             <div class="layui-row layui-col-md12">
                 <h3 class="blogtitle">
-                    <a href="{:url('Index/showArticleInfo',['id'=>$vo.id])}">
+                    <a href="{:url('showArticleInfo',['id'=>$vo.id])}">
                         {$vo.title}
                     </a>
                 </h3>

@@ -5,6 +5,7 @@ namespace app\controller;
 use app\BaseController;
 use think\Request;
 use app\model\Article as ArticleModel;
+use app\model\Comment as CommentModel;
 
 
 class Article extends BaseController
@@ -55,5 +56,30 @@ class Article extends BaseController
         $article->read +=1;
         $result = $article->isAutoWriteTimestamp(false)->save();
         return $result;
+    }
+
+    public function commentAdd(Request $request)
+    {
+        $commentModel = new CommentModel();
+
+        $commentValue = $request->post('comment');
+        
+        $nicknameValue = $request->post('nickname');
+         
+        $articleId = $request->post('articleId');
+
+        $replyId = $request->post('repluId');
+
+        $commentModel->comment = $commentValue;
+
+        $commentModel->nickname = $nicknameValue;
+
+        $commentModel->article_id = $articleId;
+
+        $commentModel->reply_id = $replyId;
+
+        $result = $commentModel->save();
+
+        return json($result);
     }
 }
