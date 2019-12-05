@@ -58,6 +58,12 @@ class Article extends BaseController
         return $result;
     }
 
+    /**
+     * 添加评论
+     *
+     * @param Request $request
+     * @return void
+     */
     public function commentAdd(Request $request)
     {
         $commentModel = new CommentModel();
@@ -68,18 +74,28 @@ class Article extends BaseController
          
         $articleId = $request->post('articleId');
 
-        $replyId = $request->post('repluId');
-
         $commentModel->comment = $commentValue;
 
         $commentModel->nickname = $nicknameValue;
 
         $commentModel->article_id = $articleId;
 
-        $commentModel->reply_id = $replyId;
-
         $result = $commentModel->save();
 
         return json($result);
+    }
+
+    /**
+     * 获取评论
+     *
+     * @param int $articleId
+     * @return void
+     */
+    public function getComment($articleId)
+    {
+        $commentModel = new CommentModel();
+        $commentResult = $commentModel->where('article_id',$articleId)->select();
+        // return json($commentResult);
+        return $commentResult;
     }
 }

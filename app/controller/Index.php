@@ -29,8 +29,10 @@ class Index extends BaseController
             return $e->getMessage();
         }
 
-        $acticleInfo = ArticleModel::find($articleId);
+        $acticleInfo = ArticleModel::withoutField(['delete_time'])->find($articleId);
+        $commentInfo = $articleController->getComment($articleId);
         View::assign('data',$acticleInfo);
+        View::assign('comment',$commentInfo);
         View::layout(true);
         return View::fetch();      
     }

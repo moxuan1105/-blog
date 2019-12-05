@@ -7,10 +7,29 @@
     </div>
 </div>
 
+<div class="commentList">
+    <fieldset class="layui-elem-field">
+        <legend>评论列表</legend>
+        {foreach $comment as $commentKey => $commentValue}
+        <div class="layui-card commentContent">
+            <div class="layui-card-header">
+                <a>{$commentValue.nickname}</a> 
+                <p style="display: inline-block;">{$commentValue.create_time}</p>
+                <p style="display: inline-block;">第{$commentKey+1}楼</p>
+            </div>
+            <div class="layui-card-body">
+                <p style="display: block;">{$commentValue.comment}</p>
+                <button data-replyId={$commentValue.id}>回复</button>
+            </div>
+        </div>
+        {/foreach}
+    </fieldset>
+</div>
+
 <div class="commentAdd">
     <fieldset class="layui-elem-field">
         <legend>评论</legend>
-        <form class="layui-form">
+        <form class="layui-form" id="commentForm">
             <div class="layui-card">
                 <div class="layui-card-body">
                     <textarea name="comment" class="layui-textarea" lay-verify="required"></textarea>
@@ -25,26 +44,6 @@
     </fieldset>
 </div>
 
-<div class="commentList">
-    <fieldset class="layui-elem-field">
-        <legend>评论列表</legend>
-        {for start="0" end="5"}
-        
-        <div class="layui-card commentContent">
-            <div class="layui-card-header">
-                昵称    创建时间    第{$i+1}楼
-            </div>
-            <div class="layui-card-body">
-                评论内容
-                <button data-replyId={$i+1}>回复</button>
-            </div>
-        </div>
-
-        {/for}
-    </fieldset>
-</div>
-
-
 <script>
     // 按需加载css 
     layui.link('/static/css/showArticleInfo.css');
@@ -53,20 +52,27 @@
         var layer = layui.layer;
         form.render();
 
-        var replyId = 0;
-
         form.on('submit(commentSubmit)',function(obj){
-            console.log(obj);
+            // console.log(obj);
             var formData = obj.field;
-            formData['replyId'] = replyId;
             $.ajax({
                 url:"{:url('Article/commentAdd')}",
                 type:'post',
                 data:formData,
                 dataType:'json',
                 success:function(successData){
-                    console.log(successData);
-                    layer.alert(JSON.stringify(successData));
+                    var msg = '留言没能成功留下 ┭┮﹏┭┮';
+                    var iconCode = 5;
+                    if(successData == true){
+                        msg = '感谢留下您的留言 (#^.^#)'
+                        iconCode = 6;
+                        console.log($('#commentForm'));
+                        $('#commentForm')[0].reset();
+                        form.render();
+                    }
+                    layer.msg(msg,{
+                        icon:iconCode
+                    });
                 }
             });
             return false;
