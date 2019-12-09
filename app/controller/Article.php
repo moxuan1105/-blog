@@ -10,13 +10,19 @@ use app\model\Comment as CommentModel;
 
 class Article extends BaseController
 {
+    /**
+     * 获取文章列表 不包括删除过的文章
+     *
+     * @param Request $request
+     * @return void
+     */
     public function getList(Request $request)
     {
         $page = (int)$request->get('page')?:1;
         $limit = (int)$request->get('limit')?:1;
         $page = ($page - 1) * $limit;
 
-        $data = ArticleModel::withoutField(['article','delete_time'])->limit($page,$limit)->select();
+        $data = ArticleModel::withoutField(['article','delete_time'])->where('is_draft','0')->order('update_time','desc')->limit($page,$limit)->select();
         $result = [
             'code'=>0,
             'msg'=>$limit,
@@ -26,6 +32,12 @@ class Article extends BaseController
         return json($result);
     }
 
+    /**
+     * 添加新文章
+     *
+     * @param Request $request
+     * @return void
+     */
     public function add(Request $request)
     {
         $articleModel = new ArticleModel();
@@ -44,6 +56,12 @@ class Article extends BaseController
         return json($result);
     }
 
+    /**
+     * 删除文章 把文章放入回收站
+     *
+     * @param Request $request
+     * @return void
+     */
     public function delete(Request $request)
     {
         $result = ArticleModel::destroy($request->post('id'));
@@ -91,11 +109,49 @@ class Article extends BaseController
      * @param int $articleId
      * @return void
      */
-    public function getComment($articleId)
+    public function getComment(Request $request)
     {
+        $articleId = $request->get('articleId');
         $commentModel = new CommentModel();
         $commentResult = $commentModel->where('article_id',$articleId)->select();
-        // return json($commentResult);
-        return $commentResult;
+        $commentResult = ['list'=>$commentResult];
+        return json($commentResult);
+        // return $commentResult;
+    }
+
+    /**
+     * 文章回收站
+     *
+     * @return void
+     */
+    public function getRecycleList(Request $request)
+    {
+        $page = (int)$request->get('page')?:1;
+        $limit = (int)$request->get('limit')?:20;
+        $page = ($page - 1) * $limit;
+
+        $data = ArticleModel::onlyTrashed(['article','delete_time'])->where('is_draft','0')->order('id','desc')->limit($page,$limit)->select();
+
+        $result = [
+            'code'=>0,
+            'msg'=>$limit,
+            'count'=>ArticleModel::count(),
+            'data'=>$data
+        ];
+        return json($result);
+    }
+
+    /**
+     * 文章恢复
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function restore(Request $request){
+        $acticleId = (int) $request->post('articleId');  
+
+        $acticle = ArticleModel::onlyTrashed()->find($acticleId); 
+        
+        return json($acticle->restore());
     }
 }

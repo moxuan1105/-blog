@@ -23,7 +23,8 @@ class Article extends Model
         'create_time'=>'datetime',
         'update_time'=>'datetime',
         'delete_time'=>'datetime',
-        'read'=>'int'
+        'read'=>'int',
+        'is_draft'=>'int'
     ];
 
 }

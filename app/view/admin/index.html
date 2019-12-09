@@ -64,14 +64,14 @@
                                     <cite>分类管理</cite></a>
                             </li>
                             <li>
-                                <a onclick="xadmin.add_tab('添加新文章','{:url(\'articleAdd\')}',true)">
+                                <a onclick="xadmin.add_tab('草稿箱','{:url(\'articleDraft\')}',true)">
                                     <i class="iconfont">&#xe6a7;</i>
-                                    <cite>添加新文章</cite></a>
+                                    <cite>草稿箱</cite></a>
                             </li>
                             <li>
-                                <a onclick="xadmin.add_tab('JSON','{:url(\'Article/getList\',[\'page\'=>1,\'limit\'=>10])}')">
+                                <a onclick="xadmin.add_tab('回收站','{:url(\'articleRecycle\')}',true)">
                                     <i class="iconfont">&#xe6a7;</i>
-                                    <cite>JSON</cite></a>
+                                    <cite>文章回收站</cite></a>
                             </li>
                             <li>
                                 <a href="javascript:;">
@@ -316,7 +316,7 @@
                 </div>
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show">
-                        <iframe src="{:url('hello')}" frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                        <iframe src="{:url('articleAdd')}" frameborder="0" scrolling="yes" class="x-iframe"></iframe>
                     </div>
                 </div>
                 <div id="tab_show"></div>

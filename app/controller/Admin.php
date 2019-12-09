@@ -32,11 +32,21 @@ class Admin extends BaseController
         return View::fetch();
     }
 
+    /**
+     * 文章管理
+     *
+     * @return void
+     */
     public function articleManage()
     {
         return View::fetch();
     }
 
+    /**
+     * 文章分类
+     *
+     * @return void
+     */
     public function articleClass(){
         return View::fetch();
     }
@@ -48,6 +58,25 @@ class Admin extends BaseController
      */
     public function articleAdd()
     {
+        return View::fetch();
+    }
+
+    /**
+     * 文章回收站
+     *
+     * @return void
+     */
+    public function articleRecycle()
+    {
+        return View::fetch();
+    }
+
+    /**
+     * 草稿箱
+     *
+     * @return void
+     */
+    public function articleDraft(){
         return View::fetch();
     }
 }

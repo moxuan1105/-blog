@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {load href="/static/lib/layui/css/layui.css"/}
+    {load href="/static/js/jquery-3.4.1.js"/}
+    {load href="/static/lib/layui/layui.js"/}
+    <style>
+    .layui-table-cell{
+        height: auto;
+        white-space: normal;
+    }
+    .layui-card{
+        margin-bottom:0
+    }
+    h1{
+        text-align: center;
+    }
+    </style>
+</head>
+<body>
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <h1>文章回收站</h1>
+        </div>
+        <div class="layui-card-body">
+            <table class="layui-table" id="articleTable" lay-filter="articleTableFilter"></table>
+        </div>
+    </div>
+    <script>
+        layui.use(['table','layer'],function(){
+            var table = layui.table;
+            var layer = layui.layer;
+
+            table.render({
+                elem:'#articleTable',
+                url:'{:url(\'Article/getRecycleList\')}',
+                height:'full-150',
+                page:true,
+                limit:20,
+                limits:[20,40,60],
+                even: true, //开启隔行背景
+                cols:[[
+                    {type:'numbers',title:'序号',align:'center'},
+                    {field:'title',title:'标题',align:'left'},
+                    {field:'image',title:'图片',templet:'#imgTpl',align:'center',width:140},
+                    {field:'create_time',title:'创建时间',align:'center'},
+                    {field:'update_time',title:'更新时间',align:'center'},
+                    {title:'操作',toolbar:'#actionTool',align:'center'}
+                ]]
+            });
+
+            //监听工具条 
+            table.on('tool(articleTableFilter)', function(obj){ 
+                var data = obj.data; 
+                var layEvent = obj.event; 
+                var tr = obj.tr; 
+                
+                if(layEvent === 'restore'){ // 恢复
+                    $.ajax({
+                        url:'{:url(\'Article/restore\')}',
+                        type:'post',
+                        data:{
+                            articleId:data.id
+                        },
+                        dataType:'json',
+                        success:function(sucData){
+                            console.log('success',sucData);
+                        },
+                        error:function(errorData){
+                            console.log('error',errorData);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    <script type="text/html" id="imgTpl">
+        <img src="{{d.image}}" alt="博客图像">
+    </script>
+
+    <script type="text/html" id="actionTool">
+        <a class="layui-btn layui-btn-xs" lay-event="restore">恢复</a>
+    </script>
+</body>
+</html>

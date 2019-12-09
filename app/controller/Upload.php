@@ -11,10 +11,11 @@ class Upload extends BaseController
     public function images(Request $request)
     {
         // 变量名需要先定义才能使用
-        $code = 0;
+        $code = (int)1;
         $file = $request->file(); 
         $savename =null;
-        $msg = null;
+        $msg = 'fail';
+        $url = null;
         try {
             // 验证上传的图片 
             // 验证规则  
@@ -22,19 +23,19 @@ class Upload extends BaseController
             validate([
                 'file'=>'file|fileSize:409600|fileExt:jpg,jpeg,png|image'
             ])->check($file); 
-            $savename = Filesystem::putFile('images', $file['file'],'md5');
+            $savename = Filesystem::putFile('images', $file['editormd-image-file'],'md5');
+            $url = $request->domain()."/upload/".$savename;
+            $url = str_replace('\\','/',$url);
+            $msg = 'success';
         } catch (ValidateException $e) { 
             $msg = $e->getMessage(); 
-            $code =1;
+            $code =(int) 0;
         }
 
         return json([
-            'code'=>$code,
-            'msg'=>$msg,
-            'data'=>[
-                'src'=>'/upload/'.$savename,
-                'title'=>'博客图片'
-            ]
+            'success'=>$code,
+            'message'=>$msg,
+            'url' => $url
         ]);
     }
 } 

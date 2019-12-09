@@ -13,12 +13,28 @@
         height: auto;
         white-space: normal;
     }
+    .layui-card{
+        margin-bottom:0
+    }
+    h1{
+        text-align: center;
+    }
     </style>
 </head>
 <body>
-    <h1>文章列表</h1>
-    <table class="layui-table" id="articleTable" lay-filter="articleTableFilter"></table>
-
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <h1>文章列表</h1>
+        </div>
+        <div class="layui-card-body">
+            <div class="layui-card-header">
+                <button class="layui-btn" id="articleAdd">添加文章</button>
+            </div>
+            <div class="layui-card-body">
+                <table class="layui-table" id="articleTable" lay-filter="articleTableFilter"></table>
+            </div>
+        </div>
+    </div>
     <script>
         layui.use(['table','layer'],function(){
             var table = layui.table;
@@ -27,12 +43,11 @@
             table.render({
                 elem:'#articleTable',
                 url:'{:url(\'Article/getList\')}',
-                height:'full-100',
+                height:'full-170',
                 page:true,
                 limit:20,
                 limits:[20,40,60],
                 even: true, //开启隔行背景
-                // size: 'lg', //小尺寸的表格
                 cols:[[
                     {type:'numbers',title:'序号',align:'center'},
                     {field:'title',title:'标题',align:'left'},

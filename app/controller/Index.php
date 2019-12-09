@@ -13,7 +13,7 @@ class Index extends BaseController
 {
     public function index()
     {
-        $articleInfo = ArticleModel::withoutField(['article','delete_time'])->order(['id'=>'desc'])->select();
+        $articleInfo = ArticleModel::withoutField(['article','delete_time'])->order(['read'=>'desc','id'])->select();
         View::assign('data',$articleInfo);
         View::layout(true);
         return View::fetch();
@@ -30,9 +30,9 @@ class Index extends BaseController
         }
 
         $acticleInfo = ArticleModel::withoutField(['delete_time'])->find($articleId);
-        $commentInfo = $articleController->getComment($articleId);
+        // $commentInfo = $articleController->getComment($articleId);
         View::assign('data',$acticleInfo);
-        View::assign('comment',$commentInfo);
+        // View::assign('comment',$commentInfo);
         View::layout(true);
         return View::fetch();      
     }

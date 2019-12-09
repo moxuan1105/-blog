@@ -6,8 +6,8 @@ h1{
     text-align: center;
 }
 
-.layui-card-body P{
-    text-indent: 2em;
+.layui-card-body p{
+    /* text-indent: 2em; */
     font-size: 18px;
 }
 
@@ -40,4 +40,18 @@ h1{
 
 .layui-card.commentContent{
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.38);
+}
+
+.layui-card:last-child {
+    margin-bottom: 15px;
+}
+
+.comment-scroll{
+    height: 1000px;
+    margin: 10px;
+    overflow: auto;
+}
+
+.editormd-preview-container, .editormd-html-preview{
+    background: #ffffff22;
 }
