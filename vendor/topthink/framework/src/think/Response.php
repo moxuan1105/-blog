@@ -12,8 +12,6 @@ declare (strict_types = 1);
 
 namespace think;
 
-use think\Cookie;
-
 /**
  * 响应输出基础类
  * @package think

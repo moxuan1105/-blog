@@ -35,25 +35,47 @@ class Article extends BaseController
     /**
      * 添加新文章
      *
+     * @return void
+     */
+    public function add()
+    {
+        $articleModel = new ArticleModel();
+
+        $imageValue = '/static/blog/images/dva.jpg';
+
+        $articleModel->title = date('Y-m-d H:i:s',time());
+        // $articleModel->article = $contentValue;
+        $articleModel->image = $imageValue;
+
+        $articleModel->save();
+
+        $articleId = $articleModel->id;
+        return json($articleId);
+    }
+
+    /**
+     * 更新文章
+     *
      * @param Request $request
      * @return void
      */
-    public function add(Request $request)
+    public function update(Request $request)
     {
-        $articleModel = new ArticleModel();
+        $articleId = $request->post('articleId');
+
+        $articleModel = ArticleModel::find($articleId);
 
         $titleValue = $request->post('title');
  
         $contentValue = $request->post('contentValue');
 
-        $imageValue = $request->post('iamgeValue')?:'/static/blog/images/dva.jpg';
+        $draft = $request->post('draft');
 
         $articleModel->title = $titleValue;
         $articleModel->article = $contentValue;
-        $articleModel->image = $imageValue;
+        $articleModel->is_draft = $draft;
 
-        $result = $articleModel->save();
-        return json($result);
+        return json($articleModel->save());
     }
 
     /**
@@ -153,5 +175,27 @@ class Article extends BaseController
         $acticle = ArticleModel::onlyTrashed()->find($acticleId); 
         
         return json($acticle->restore());
+    }
+
+    /**
+     * 获取草稿箱文章
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function getDraftList(Request $request){
+        $page = (int)$request->get('page')?:1;
+        $limit = (int)$request->get('limit')?:20;
+        $page = ($page - 1) * $limit;
+
+        $data = ArticleModel::withoutField(['article','delete_time'])->where('is_draft','1')->order('id','desc')->limit($page,$limit)->select();
+
+        $result = [
+            'code'=>0,
+            'msg'=>$limit,
+            'count'=>ArticleModel::count(),
+            'data'=>$data
+        ];
+        return json($result);
     }
 }

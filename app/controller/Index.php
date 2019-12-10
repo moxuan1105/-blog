@@ -40,6 +40,9 @@ class Index extends BaseController
 
     public function downloadImages(){
         // 下载方法用不了
+        // header("Content-Type:application/octet-stream");
+        // header("Accept-Ranges: bytes");
+        // header("Content-Disposition: attachment; filename=aaa.jpg");
         return download('upload/images/1c/4d1199812eb27c0eaa35053fa28d41.jpeg','aaa.jpeg');
     }
 

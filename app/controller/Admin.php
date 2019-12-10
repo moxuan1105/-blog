@@ -4,7 +4,7 @@ namespace app\controller;
 use app\BaseController;
 use think\facade\View;
 use think\facade\Route;
-use app\model\User;
+use app\controller\Article;
 
 class Admin extends BaseController
 {
@@ -47,7 +47,8 @@ class Admin extends BaseController
      *
      * @return void
      */
-    public function articleClass(){
+    public function articleClass()
+    {
         return View::fetch();
     }
 
@@ -58,6 +59,9 @@ class Admin extends BaseController
      */
     public function articleAdd()
     {
+        $articleConttroller = new Article($this->app);
+        $articleId = $articleConttroller->add();
+        View::assign('articleId',$articleId);
         return View::fetch();
     }
 
@@ -76,7 +80,8 @@ class Admin extends BaseController
      *
      * @return void
      */
-    public function articleDraft(){
+    public function articleDraft()
+    {
         return View::fetch();
     }
 }
