@@ -39,18 +39,15 @@ class Article extends BaseController
      */
     public function add()
     {
-        $articleModel = new ArticleModel();
-
         $imageValue = '/static/blog/images/dva.jpg';
+        $title = date('Y-m-d H:i:s');
 
-        $articleModel->title = date('Y-m-d H:i:s',time());
-        // $articleModel->article = $contentValue;
-        $articleModel->image = $imageValue;
+        $articleModel = ArticleModel::create([
+            'title'=>$title,
+            'image'=>$imageValue
+        ]);
 
-        $articleModel->save();
-
-        $articleId = $articleModel->id;
-        return json($articleId);
+        return json($articleModel->id);
     }
 
     /**

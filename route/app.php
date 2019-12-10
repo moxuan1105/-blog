@@ -20,3 +20,6 @@ Route::group('index', function () {
     Route::rule('/', 'index');
     Route::miss('miss');
 })->ext('html');
+
+
+// Route::post('Admin/articleEdit','Admin/articleEdit');

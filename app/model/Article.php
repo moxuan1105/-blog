@@ -14,18 +14,21 @@ class Article extends Model
     protected $deleteTime = 'delete_time';
     protected $defaultSoftDelete = null;
 
+    protected $pk = 'id';
+
     // 定义数据库中的字段才能操作对应的字段数据
-    protected $schema = [
-        'id' => 'int',
-        'title'=>'string',
-        'image'=>'string',
-        'article'=>'string',
-        'create_time'=>'datetime',
-        'update_time'=>'datetime',
-        'delete_time'=>'datetime',
-        'read'=>'int',
-        'is_draft'=>'int'
-    ];
+    // 定义字段后 无法获取自增ID？？？
+    // protected $schema = [
+    //     'id' => 'int',
+    //     'title'=>'string',
+    //     'image'=>'string',
+    //     'article'=>'string',
+    //     'create_time'=>'datetime',
+    //     'update_time'=>'datetime',
+    //     'delete_time'=>'datetime',
+    //     'read'=>'int',
+    //     'is_draft'=>'int'
+    // ];
 
 }
 

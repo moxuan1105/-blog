@@ -6,6 +6,7 @@ use think\facade\View;
 use app\model\Article as ArticleModel;
 use app\Request;
 use Exception;
+use think\Response;
 
 // use app\controller\Article;
 
@@ -13,7 +14,7 @@ class Index extends BaseController
 {
     public function index()
     {
-        $articleInfo = ArticleModel::withoutField(['article','delete_time'])->order(['read'=>'desc','id'])->select();
+        $articleInfo = ArticleModel::withoutField(['article','delete_time'])->where('is_draft','0')->order(['read'=>'desc','id'])->select();
         View::assign('data',$articleInfo);
         View::layout(true);
         return View::fetch();
@@ -35,15 +36,6 @@ class Index extends BaseController
         // View::assign('comment',$commentInfo);
         View::layout(true);
         return View::fetch();      
-    }
-
-
-    public function downloadImages(){
-        // 下载方法用不了
-        // header("Content-Type:application/octet-stream");
-        // header("Accept-Ranges: bytes");
-        // header("Content-Disposition: attachment; filename=aaa.jpg");
-        return download('upload/images/1c/4d1199812eb27c0eaa35053fa28d41.jpeg','aaa.jpeg');
     }
 
     //其他控制器也加上——empty方法

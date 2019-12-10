@@ -5,6 +5,7 @@ use app\BaseController;
 use think\facade\View;
 use think\facade\Route;
 use app\controller\Article;
+use app\Request;
 
 class Admin extends BaseController
 {
@@ -61,6 +62,16 @@ class Admin extends BaseController
     {
         $articleConttroller = new Article($this->app);
         $articleId = $articleConttroller->add();
+        // View::assign('articleId',$articleId);
+        // return View::fetch();
+        return Route::buildUrl('articleEdit',['aaa' => $articleId]);
+        return url('articleEdit',['articleId' => $articleId]);
+    }
+
+    public function articleEdit(Request $request)
+    {
+        $articleId = $request->get('articleId');
+        
         View::assign('articleId',$articleId);
         return View::fetch();
     }
