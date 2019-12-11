@@ -36,11 +36,11 @@
 {load href="/lib/editormd/editormd.js"/}
 {load href="/lib/editormd/lib/marked.min.js"/}
 {load href="/lib/editormd/lib/prettify.min.js"/}
-<!-- {load href="/lib/editormd/lib/raphael.min.js"/} -->
-<!-- {load href="/lib/editormd/lib/underscore.min.js"/} -->
-<!-- {load href="/lib/editormd/lib/sequence-diagram.min.js"/} -->
-<!-- {load href="/lib/editormd/lib/flowchart.min.js"/} -->
-<!-- {load href="/lib/editormd/lib/jquery.flowchart.min.js"/} -->
+{load href="/lib/editormd/lib/raphael.min.js"/}
+{load href="/lib/editormd/lib/underscore.min.js"/}
+{load href="/lib/editormd/lib/sequence-diagram.min.js"/}
+{load href="/lib/editormd/lib/flowchart.min.js"/}
+{load href="/lib/editormd/lib/jquery.flowchart.min.js"/}
 
 <script>
     // 按需加载css 
@@ -57,6 +57,9 @@
             markdownSourceCode : false, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
             emoji           : true,
             tex             : true,  // 默认不解析
+            flowChart       : true,
+            sequenceDiagram : true,
+            taskList        : true,
         });
     })
 

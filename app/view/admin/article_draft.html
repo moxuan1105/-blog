@@ -24,7 +24,7 @@
 <body>
     <div class="layui-card">
         <div class="layui-card-header">
-            <h1>文章回收站</h1>
+            <h1>草稿箱</h1>
         </div>
         <div class="layui-card-body">
             <table class="layui-table" id="articleTable" lay-filter="articleTableFilter"></table>
@@ -37,7 +37,7 @@
 
             table.render({
                 elem:'#articleTable',
-                url:'{:url(\'Article/getRecycleList\')}',
+                url:'{:url(\'Article/getDraftList\')}',
                 height:'full-150',
                 page:true,
                 limit:20,

@@ -65,7 +65,7 @@
                 var tr = obj.tr; 
                 
                 if(layEvent === 'del'){ //删除
-                    console.log(data);
+                    // console.log(data);
                     // return false;
                     layer.confirm('真的删除行么', function(index){
                         obj.del();
@@ -86,12 +86,7 @@
                         layer.close(index);
                     });
                 } else if(layEvent === 'edit'){ //编辑
-                    //do something
-                    //同步更新缓存对应的值
-                    obj.update({
-                    username: '123'
-                    ,title: 'xxx'
-                    });
+                    location.href = "{:url('articleEdit')}"+"?articleId="+data.id
                 } else if(layEvent === 'LAYTABLE_TIPS'){
                     layer.alert('Hi，头部工具栏扩展的右侧图标。');
                 }

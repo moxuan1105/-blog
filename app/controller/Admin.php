@@ -5,7 +5,8 @@ use app\BaseController;
 use think\facade\View;
 use think\facade\Route;
 use app\controller\Article;
-use app\Request;
+use app\model\Article as ArticleModel;
+use think\Request;
 
 class Admin extends BaseController
 {
@@ -60,19 +61,28 @@ class Admin extends BaseController
      */
     public function articleAdd()
     {
-        $articleConttroller = new Article($this->app);
-        $articleId = $articleConttroller->add();
-        // View::assign('articleId',$articleId);
-        // return View::fetch();
-        return Route::buildUrl('articleEdit',['aaa' => $articleId]);
-        return url('articleEdit',['articleId' => $articleId]);
+        // 先检测草稿箱中是否存在文件文件 如果存在 取最新的一份
+        $articleModel = ArticleModel::field('id')->where('is_draft',1)->order('update_time','desc')->find();
+
+        if(is_null($articleModel)){
+            $articleConttroller = new Article($this->app);
+            $articleId = (int) $articleConttroller->add();
+        }else{
+            $articleId = (int) $articleModel->id;
+        }
+        return redirect((string)url('articleEdit',['articleId'=>$articleId]));
     }
 
     public function articleEdit(Request $request)
     {
         $articleId = $request->get('articleId');
-        
-        View::assign('articleId',$articleId);
+        $articleModel = ArticleModel::field(['title','article'])->find($articleId);
+        $data = [
+            'articleId' => $articleId,
+            'articleTitle'=>$articleModel->title,
+            'article'=>$articleModel->article
+        ];
+        View::assign('data',$data);
         return View::fetch();
     }
 

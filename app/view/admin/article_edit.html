@@ -32,17 +32,18 @@
     <div class="layui-card">
         <form class="layui-form">
             <div class="layui-card-header">
-                <button class="layui-btn" lay-submit lay-filter="articleAddBut">提交</button>
+                <button class="layui-btn" lay-submit lay-filter="articleAddBut" draft='0'>提交</button>
+                <button class="layui-btn" lay-submit lay-filter="articleAddBut" draft='1'>保存为草稿</button>
             </div>
             <div class="layui-card-body">
                 <div class="layui-form-item">
-                    <input type="hidden" name="articleId" value='{$articleId}'>
-                    <input type="text" class="layui-input" name='title' placeholder="标题" autocapitalize="off" required lay-verify='required'>
+                    <input type="hidden" name="articleId" value='{$data.articleId}'>
+                    <input type="text" class="layui-input" name='title' placeholder="标题" autocapitalize="off" required lay-verify='required' value='{$data.articleTitle}'>
                 </div>
                 <!-- 设置Markdown编辑器 -->
                 <div class="layui-form-item editor">
                     <div id="test-editor">
-                        <textarea style="display:none;" name="contentValue" lay-verify='required'></textarea>
+                        <textarea style="display:none;" name="contentValue">{$data.article}</textarea>
                     </div>
                 </div>
             </div>
@@ -78,20 +79,30 @@
 
             form.on('submit(articleAddBut)',function(obj){
                 var data = obj.field;
+                var draft = $(this).attr('draft');
+                data['draft']=draft;
+                // console.log(data);
+                // return false;
                 $.ajax({
-                    url:"{:url('Article/add')}",
+                    url:"{:url('Article/update')}",
                     type:'post',
                     data:data,
                     dataType:'json',
                     success:function(sucData){
                         if(sucData === true){
-                            layer.alert('success');
+                            layer.msg('success',{
+                                icon:6,
+                                time:2000
+                            })
+                            if(draft == 0){
+                                setTimeout(function () {
+                                    location.href = "{:url('articleManage')}";
+                                },2000)
+                            }
                         }
                     },
                     error:function(errorData){
-                        console.log(errorData);
                         layer.alert('error');
-
                     }
                 });
                 return false;

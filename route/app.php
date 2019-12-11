@@ -10,16 +10,11 @@
 // +----------------------------------------------------------------------
 use think\facade\Route;
 
-// Route::get('think', function () {
-//     return 'hello,ThinkPHP6!';
-// });
-
 Route::group('index', function () {
     // 定义傻逼路由规则 不定义还不能使用
+    // 定义之后变成强制路由模式
     Route::rule('showArticleInfo', 'showArticleInfo');
     Route::rule('/', 'index');
     Route::miss('miss');
 })->ext('html');
 
-
-// Route::post('Admin/articleEdit','Admin/articleEdit');

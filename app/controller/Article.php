@@ -23,10 +23,11 @@ class Article extends BaseController
         $page = ($page - 1) * $limit;
 
         $data = ArticleModel::withoutField(['article','delete_time'])->where('is_draft','0')->order('update_time','desc')->limit($page,$limit)->select();
+        $count = ArticleModel::where('is_draft','0')->count();
         $result = [
             'code'=>0,
             'msg'=>$limit,
-            'count'=>ArticleModel::count(),
+            'count'=>$count,
             'data'=>$data
         ];
         return json($result);
@@ -47,7 +48,7 @@ class Article extends BaseController
             'image'=>$imageValue
         ]);
 
-        return json($articleModel->id);
+        return $articleModel->id;
     }
 
     /**
@@ -149,12 +150,13 @@ class Article extends BaseController
         $limit = (int)$request->get('limit')?:20;
         $page = ($page - 1) * $limit;
 
-        $data = ArticleModel::onlyTrashed(['article','delete_time'])->where('is_draft','0')->order('id','desc')->limit($page,$limit)->select();
-
+        // onlyTrashed 查询仅被软删除的数据
+        $data = ArticleModel::onlyTrashed()->where('is_draft','0')->order('id','desc')->limit($page,$limit)->select();
+        $count = ArticleModel::onlyTrashed()->where('is_draft','0')->count();
         $result = [
             'code'=>0,
             'msg'=>$limit,
-            'count'=>ArticleModel::count(),
+            'count'=>count($data),
             'data'=>$data
         ];
         return json($result);
@@ -186,11 +188,12 @@ class Article extends BaseController
         $page = ($page - 1) * $limit;
 
         $data = ArticleModel::withoutField(['article','delete_time'])->where('is_draft','1')->order('id','desc')->limit($page,$limit)->select();
+        $count = ArticleModel::where('is_draft','1')->count();
 
         $result = [
             'code'=>0,
             'msg'=>$limit,
-            'count'=>ArticleModel::count(),
+            'count'=>$count,
             'data'=>$data
         ];
         return json($result);
