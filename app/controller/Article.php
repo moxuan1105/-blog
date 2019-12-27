@@ -156,7 +156,7 @@ class Article extends BaseController
         $result = [
             'code'=>0,
             'msg'=>$limit,
-            'count'=>count($data),
+            'count'=>$count,
             'data'=>$data
         ];
         return json($result);

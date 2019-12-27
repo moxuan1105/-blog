@@ -28,8 +28,7 @@
 </head>
 
 <body>
-
-    <div class="layui-card">
+    <div class="layui-card"> 
         <form class="layui-form">
             <div class="layui-card-header">
                 <button class="layui-btn" lay-submit lay-filter="articleAddBut">提交</button>
@@ -90,12 +89,10 @@
                     error:function(errorData){
                         console.log(errorData);
                         layer.alert('error');
-
                     }
                 });
                 return false;
             });
-
         });
     </script>
 </body>
