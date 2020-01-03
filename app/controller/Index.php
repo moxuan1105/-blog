@@ -21,7 +21,7 @@ class Index extends BaseController
     }
 
     public function showArticleInfo(Request $request){
-        $articleId = $request->get('id');
+        $articleId = $request->param('id');
         // 调用其他的控制的函数时  初始化时传入 $this->app
         $articleController =  new Article($this->app);
         try{
@@ -43,5 +43,4 @@ class Index extends BaseController
         View::layout(true);
         return View::fetch();
     }
-
 }   

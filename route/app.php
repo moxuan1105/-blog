@@ -10,11 +10,24 @@
 // +----------------------------------------------------------------------
 use think\facade\Route;
 
-Route::group('index', function () {
+// 定义傻逼路由规则
+Route::group('Index', function () {
     // 定义傻逼路由规则 不定义还不能使用
     // 定义之后变成强制路由模式
-    Route::rule('showArticleInfo', 'showArticleInfo');
+    Route::rule('/:id', 'showArticleInfo');
     Route::rule('/', 'index');
     Route::miss('miss');
-})->ext('html');
+});
+
+Route::group('Admin',function(){
+    Route::rule('articleManage', 'Admin/articleManage');
+    Route::rule('articleClass', 'Admin/articleClass');
+    Route::rule('articleRecycle', 'Admin/articleRecycle');
+    Route::rule('articleDraft', 'Admin/articleDraft');
+    Route::rule('articleAdd', 'Admin/articleAdd');
+    Route::rule('/:articleId', 'Admin/articleEdit');
+    Route::rule('hello', 'admin/hello');
+    Route::rule('/', 'admin/index');
+    Route::miss('admin/miss');
+});
 

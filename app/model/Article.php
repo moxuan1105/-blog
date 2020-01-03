@@ -29,6 +29,5 @@ class Article extends Model
     //     'read'=>'int',
     //     'is_draft'=>'int'
     // ];
-
 }
 

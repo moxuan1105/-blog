@@ -20,17 +20,7 @@ class Admin extends BaseController
         }
     }
 
-    /**
-     * 憨批地方被写进了路由中
-     *
-     * @param string $name
-     * @return void
-     */
-    public function hello($name = 'ThinkPHP6')
-    {
-        View::assign('name',$name); 
-        View::assign('email','thinkphp@qq.com'); // 或者批量赋值 
-        // View::assign([ 'name' => 'ThinkPHP', 'email' => 'thinkphp@qq.com' ]); // 模板输出 
+    public function hello(){
         return View::fetch();
     }
 
@@ -63,24 +53,23 @@ class Admin extends BaseController
     {
         // 先检测草稿箱中是否存在文件文件 如果存在 取最新的一份
         $articleModel = ArticleModel::field('id')->where('is_draft',1)->order('update_time','desc')->find();
-
         if(is_null($articleModel)){
             $articleConttroller = new Article($this->app);
             $articleId = (int) $articleConttroller->add();
         }else{
             $articleId = (int) $articleModel->id;
         }
-        return redirect((string)url('articleEdit',['articleId'=>$articleId]));
+        return redirect((string)url($articleId));
     }
 
     public function articleEdit(Request $request)
     {
-        $articleId = $request->get('articleId');
+        $articleId = $request->param('articleId');
         $articleModel = ArticleModel::field(['title','article'])->find($articleId);
         $data = [
             'articleId' => $articleId,
-            'articleTitle'=>$articleModel->title,
-            'article'=>$articleModel->article
+            'article'=>$articleModel->article,
+            'articleTitle'=>$articleModel->title
         ];
         View::assign('data',$data);
         return View::fetch();
@@ -104,5 +93,10 @@ class Admin extends BaseController
     public function articleDraft()
     {
         return View::fetch();
+    }
+
+    // miss方法
+    public function miss(){
+        return 'a';
     }
 }

@@ -86,7 +86,8 @@
                         layer.close(index);
                     });
                 } else if(layEvent === 'edit'){ //编辑
-                    location.href = "{:url('articleEdit')}"+"?articleId="+data.id
+                    var href =  '/Admin/'+data.id+'.html';
+                    location.href = href;
                 } else if(layEvent === 'LAYTABLE_TIPS'){
                     layer.alert('Hi，头部工具栏扩展的右侧图标。');
                 }
