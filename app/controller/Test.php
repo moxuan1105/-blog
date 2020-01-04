@@ -12,7 +12,7 @@ class Test extends BaseController{
      * @return void
      */
     public function testCmdExec(){
-        $a = exec('git pull github master',$output,$status);
+        $a = exec('git pull gitee master',$output,$status);
         $data = [$a,$output,$status];
         $data = $this->str2utf8($data);
         return $data[$status];
