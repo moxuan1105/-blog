@@ -20,6 +20,4 @@ class User extends Validate
         'age.between' => '年龄只能在1-120之间', 
         'email' => '邮箱格式错误', 
     ];
-
-
 }

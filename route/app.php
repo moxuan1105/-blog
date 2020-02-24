@@ -11,7 +11,7 @@
 use think\facade\Route;
 
 // 定义傻逼路由规则
-Route::group('Index', function () {
+Route::group('index', function () {
     // 定义傻逼路由规则 不定义还不能使用
     // 定义之后变成强制路由模式
     Route::rule('/:id', 'showArticleInfo');
@@ -19,7 +19,7 @@ Route::group('Index', function () {
     Route::miss('miss');
 });
 
-Route::group('Admin',function(){
+Route::group('admin',function(){
     Route::rule('articleManage', 'Admin/articleManage');
     Route::rule('articleClass', 'Admin/articleClass');
     Route::rule('articleRecycle', 'Admin/articleRecycle');
@@ -30,4 +30,3 @@ Route::group('Admin',function(){
     Route::rule('/', 'admin/index');
     Route::miss('admin/miss');
 });
-

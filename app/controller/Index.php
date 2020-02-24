@@ -38,6 +38,11 @@ class Index extends BaseController
         return View::fetch();      
     }
 
+    public function whisper(){
+        View::layout(true);
+        return View::fetch();
+    }
+
     //其他控制器也加上——empty方法
     public function miss(){
         View::layout(true);
