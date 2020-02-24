@@ -69,9 +69,19 @@
                         dataType:'json',
                         success:function(sucData){
                             console.log('success',sucData);
+                            if(sucData === true){
+                                layer.msg('操作成功',{
+                                    icon:6
+                                },function(){
+                                    $('.layui-laypage-btn').click();
+                                });
+                            }
                         },
                         error:function(errorData){
-                            console.log('error',errorData);
+                            // console.log('error',errorData);
+                            layer.msg('请联系管理员',{
+                                icon:5
+                            });
                         }
                     });
                 }

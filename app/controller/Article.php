@@ -146,8 +146,8 @@ class Article extends BaseController
      */
     public function getRecycleList(Request $request)
     {
-        $page = (int)$request->get('page')?:1;
-        $limit = (int)$request->get('limit')?:20;
+        $page = (int)$request->param('page')?:1;
+        $limit = (int)$request->param('limit')?:20;
         $page = ($page - 1) * $limit;
 
         // onlyTrashed 查询仅被软删除的数据
@@ -169,7 +169,7 @@ class Article extends BaseController
      * @return void
      */
     public function restore(Request $request){
-        $acticleId = (int) $request->post('articleId');  
+        $acticleId = (int) $request->param('articleId');
 
         $acticle = ArticleModel::onlyTrashed()->find($acticleId); 
         

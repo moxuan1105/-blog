@@ -59,7 +59,7 @@ class Admin extends BaseController
         }else{
             $articleId = (int) $articleModel->id;
         }
-        return redirect((string)url($articleId));
+        return redirect(Route::buildUrl('admin/articleEdit',['articleId'=>$articleId]));
     }
 
     public function articleEdit(Request $request)
@@ -97,6 +97,8 @@ class Admin extends BaseController
 
     // miss方法
     public function miss(){
-        return 'a';
+        $request = new Request();
+        $actionName = $request->action();
+        return $actionName;
     }
 }
