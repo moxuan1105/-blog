@@ -58,32 +58,37 @@
                 var data = obj.data; 
                 var layEvent = obj.event; 
                 var tr = obj.tr; 
-                
-                if(layEvent === 'restore'){ //恢复
-                    $.ajax({
-                        url:'{:url(\'Article/restore\')}',
-                        type:'post',
-                        data:{
-                            articleId:data.id
-                        },
-                        dataType:'json',
-                        success:function(sucData){
-                            console.log('success',sucData);
-                            if(sucData === true){
-                                layer.msg('操作成功',{
-                                    icon:6
-                                },function(){
-                                    $('.layui-laypage-btn').click();
-                                });
-                            }
-                        },
-                        error:function(errorData){
-                            layer.msg('请联系管理员',{
-                                icon:5
-                            });
-                        }
-                    });
+
+                if(layEvent === 'edit'){ //编辑
+                    var href =  '/admin/'+data.id+'.html';
+                    location.href = href;
                 }
+                
+                // if(layEvent === 'restore'){ //恢复
+                //     $.ajax({
+                //         url:'{:url(\'Article/save\')}',
+                //         type:'post',
+                //         data:{
+                //             articleId:data.id
+                //         },
+                //         dataType:'json',
+                //         success:function(sucData){
+                //             console.log('success',sucData);
+                //             if(sucData === true){
+                //                 layer.msg('操作成功',{
+                //                     icon:6
+                //                 },function(){
+                //                     $('.layui-laypage-btn').click();
+                //                 });
+                //             }
+                //         },
+                //         error:function(errorData){
+                //             layer.msg('请联系管理员',{
+                //                 icon:5
+                //             });
+                //         }
+                //     });
+                // }
             });
         });
     </script>
@@ -92,7 +97,7 @@
     </script>
 
     <script type="text/html" id="actionTool">
-        <a class="layui-btn layui-btn-xs" lay-event="restore">恢复</a>
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     </script>
 </body>
 </html>
