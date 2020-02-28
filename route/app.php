@@ -26,7 +26,7 @@ Route::group('admin',function(){
     Route::rule('articleDraft', 'Admin/articleDraft');
     Route::rule('articleAdd', 'Admin/articleAdd');
     Route::rule('/:articleId', 'Admin/articleEdit');
-    Route::rule('hello', 'admin/hello');
+    Route::rule('hello', 'Admin/hello');
     Route::rule('/', 'admin/index');
     Route::miss('admin/miss');
 });
