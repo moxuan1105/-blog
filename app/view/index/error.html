@@ -1,0 +1,19 @@
+<div style="padding: 50px 0; height: 600px; text-align: center;">
+    <h1>
+        <i class="layui-icon" style="line-height: 500px; font-size: 500px; color: #393D50;"></i>
+    </h1>
+    <p style="font-size: 20px; font-weight: 300; color: #999;">查看的内容不存在</p>
+</div>
+
+<script>
+    // 强制跳转到首页
+    setTimeout(function(){
+
+        layui.data('active', {
+            key: 'activeValue'
+            ,value: '文章'
+        });
+
+        window.location.href = '{:url("/")}';
+    },3000)
+</script>

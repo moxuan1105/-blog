@@ -44,8 +44,8 @@ class Login extends BaseController
     {
 
         $msg = true;
-        $username = $request->post('username');
-        $password = $request->post('password');
+        $username = $request->param('username');
+        $password = $request->param('password');
         try {
             validate(UserValidate::class)->check([ 
                 'name' => $username,
@@ -76,7 +76,7 @@ class Login extends BaseController
     public function logout()
     {
         Session::clear();
-        return redirect(Route::buildUrl('Login/'));
+        return redirect(Route::buildUrl('Admin/index'));
     }
 
 }

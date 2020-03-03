@@ -27,9 +27,11 @@ class Index extends BaseController
         try{
             $articleController->read($articleId);
         }catch(Exception $e){
-            return $e->getMessage();
+            // 返回一个错误空白页
+            View::layout(true);
+            return View::fetch('error');
+            
         }
-
         $acticleInfo = ArticleModel::withoutField(['delete_time'])->find($articleId);
         // $commentInfo = $articleController->getComment($articleId);
         View::assign('data',$acticleInfo);
